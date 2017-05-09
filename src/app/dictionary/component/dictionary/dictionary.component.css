@@ -1,10 +1,11 @@
 div.content {
-    margin: 0 auto 0 auto;
-    width: 15%;
+    margin: 0px auto;
+    width: 70%;
 }
 
 h3.dictionary-name {
     margin-bottom: 25px;
+    text-align: center;
 }
 
 div.pairs {
@@ -13,4 +14,19 @@ div.pairs {
 
 a {
     margin-right: 10px;
+}
+
+.pairs > table {
+    border-spacing: 20px;
+    border-collapse: separate;
+    margin: 0px auto;
+    width: 100%;
+}
+
+td.add-word-button {
+    text-align: center;
+}
+
+div.buttons {
+    text-align: center;
 }

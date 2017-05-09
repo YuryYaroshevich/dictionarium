@@ -10,3 +10,7 @@ html, body {
     margin-top: 52px;
     height: 70%;
 }
+
+i:hover {
+    cursor: pointer;
+}

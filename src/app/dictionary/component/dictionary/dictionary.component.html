@@ -1,12 +1,28 @@
 <div class="content" *ngIf="dictionary">
     <h3 class="dictionary-name">{{dictionary.name}}</h3>
     <div class="pairs">
-        <p *ngFor="let entry of dictionary.entries">
-            {{entry.phrase}} - {{entry.translation}}
-        </p>
+        <table>
+            <tr *ngFor="let entry of dictionary.entries">
+                <td>
+                    <input class="form-control " [(ngModel)]="entry.phrase" placeholder="phrase" />
+                </td>
+                <td>
+                    <input class="form-control " [(ngModel)]="entry.translation" placeholder="translation" />
+                </td>
+                <td>
+                    <i class="fa fa-minus-circle fa-2x" (click)="removeWord(entry)" aria-hidden="true"></i>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="add-word-button">
+                    <i class="fa fa-plus-circle fa-3x" (click)="addWord()" aria-hidden="true"></i>
+                </td>
+            </tr>
+        </table>
     </div>
+    
     <div class="buttons">
-        <a href [routerLink]="['learn']" class="btn btn-default">Learn</a>
-        <a href [routerLink]="['edit']" class="btn btn-default">Edit</a>
+        <a href="javascript:void(0)" [routerLink]="['learn']" class="btn btn-info">Learn</a>
+        <a href="javascript:void(0)" (click)="save()" class="btn btn-primary">Save</a>
     </div>
 </div>
