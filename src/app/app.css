@@ -1,0 +1,12 @@
+html, body {
+    height: 100%;
+}
+
+/*.container {
+    height: 80%
+}*/
+
+.under-header {
+    margin-top: 52px;
+    height: 70%;
+}

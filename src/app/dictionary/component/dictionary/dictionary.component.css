@@ -1,0 +1,16 @@
+div.content {
+    margin: 0 auto 0 auto;
+    width: 15%;
+}
+
+h3.dictionary-name {
+    margin-bottom: 25px;
+}
+
+div.pairs {
+    margin-bottom: 25px;
+}
+
+a {
+    margin-right: 10px;
+}

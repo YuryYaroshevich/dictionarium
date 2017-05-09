@@ -1,0 +1,40 @@
+<div class="form-horizontal" *ngIf="dictionary">
+    <fieldset>
+        <legend></legend>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Dictionary name</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" [(ngModel)]="dictionary.name" placeholder="Dictionary name">
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Language</label>
+            <div class="col-lg-10">
+                <select class="form-control" [(ngModel)]="dictionary.language">
+                    <option value="en-gb">English</option>
+                    <option value="fr-fr">French</option>
+                    <option value="de-de">German</option>
+                    <option value="es-es">Spanish</option>
+                </select>
+            </div>
+        </div>
+
+        <word-translation *ngFor="let entry of dictionary.entries"
+            [dictionaryEntry]="entry"
+            (onRemoveWord)="removeWord($event)">
+        </word-translation>
+        <div class="form-group">
+            <div class="col-lg-10">
+                <i class="fa fa-plus-square fa-3x" (click)="addWord()" aria-hidden="true"></i>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="button" class="btn btn-default" [routerLink]="['']">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="create()">Submit</button>
+            </div>
+        </div>
+    </fieldset>
+</div>

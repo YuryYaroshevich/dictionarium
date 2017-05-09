@@ -1,0 +1,12 @@
+<div *ngFor="let dictionary of dictionaries">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <a href="javascript:void(0)" [routerLink]="['/dictionary', dictionary.id]">{{dictionary.name}}</a>
+      <a href="javascript:void(0)" (click)="deleteDictionary(dictionary.id)" class="right-side">delete</a>
+      <a href="javascript:void(0)" [routerLink]="['/dictionary', dictionary.id, 'edit']" class="right-side">edit</a>
+    </div>
+  </div>  
+</div>
+
+
+

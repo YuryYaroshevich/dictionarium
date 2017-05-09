@@ -1,0 +1,35 @@
+.flashcards {
+    height: 100%;
+}
+
+div.flashcard {
+    margin: 2% auto;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    display: table;
+    position: relative;
+}
+
+i.say {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+i.arrow:hover, i.say:hover {
+    cursor: pointer;
+}
+
+div.flashcard > strong {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: x-large;
+}
+
+#arrows {
+    margin-top: -10px;
+}
+
+#translate {
+    margin-top: 8px;
+}

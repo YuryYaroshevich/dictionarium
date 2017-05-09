@@ -1,0 +1,12 @@
+<div class="content" *ngIf="dictionary">
+    <h3 class="dictionary-name">{{dictionary.name}}</h3>
+    <div class="pairs">
+        <p *ngFor="let entry of dictionary.entries">
+            {{entry.phrase}} - {{entry.translation}}
+        </p>
+    </div>
+    <div class="buttons">
+        <a href [routerLink]="['learn']" class="btn btn-default">Learn</a>
+        <a href [routerLink]="['edit']" class="btn btn-default">Edit</a>
+    </div>
+</div>
