@@ -8,6 +8,10 @@ h3.dictionary-name {
     text-align: center;
 }
 
+#usage-link {
+    margin-left: 21px;
+}
+
 div.pairs {
     margin-bottom: 25px;
 }

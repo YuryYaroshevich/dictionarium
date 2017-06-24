@@ -3,7 +3,8 @@ import { DictionaryEntry } from '../../model/dictionary-entry';
 
 @Component({
     selector: 'word-translation',
-    templateUrl: 'word-translation.component.html'
+    templateUrl: 'word-translation.component.html',
+    styleUrls: ['word-translation.component.css']
 })
 export class WordTranslationComponent {
     @Input() dictionaryEntry: DictionaryEntry;
@@ -11,5 +12,9 @@ export class WordTranslationComponent {
 
     removeWord() {
         this.onRemoveWord.emit(this.dictionaryEntry);
+    }
+
+    addLink() {
+        this.dictionaryEntry.isLinked = true;
     }
 }

@@ -1,0 +1,15 @@
+.dictionary-entry {
+    width: 70%;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+i {
+    position: absolute;
+    right: -50px;
+    top: 52px;
+}
+
+.translation, .link {
+    margin-top: 10px;
+}

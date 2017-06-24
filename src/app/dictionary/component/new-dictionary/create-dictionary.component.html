@@ -1,17 +1,16 @@
-<div class="form-horizontal" *ngIf="dictionary">
+<div id="create-dictionary" class="form-horizontal" *ngIf="dictionary">
     <fieldset>
-        <legend></legend>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">Dictionary name</label>
-            <div class="col-lg-10">
+        <div id="dictionary-name" class="form-group">
+            <div>
+                <label>Dictionary name</label>
                 <input type="text" class="form-control" [(ngModel)]="dictionary.name" placeholder="Dictionary name">
             </div>
         </div>
        
-        <div class="form-group">
-            <label class="col-lg-2 control-label">Language</label>
-            <div class="col-lg-10">
-                <select class="form-control" [(ngModel)]="dictionary.language">
+        <div id="languange" class="form-group">            
+            <div>
+                <label>Language</label>
+                <select class="form-control" [(ngModel)]="dictionary.language" placeholder="Language">
                     <option value="en-gb">English</option>
                     <option value="fr-fr">French</option>
                     <option value="de-de">German</option>
@@ -20,20 +19,27 @@
             </div>
         </div>
 
+        <div id="dictionary-link" class="form-group">
+            <div>
+                <label>Link</label>
+                <input type="text" class="form-control" [(ngModel)]="dictionary.link" placeholder="Link">
+            </div>
+        </div>
+
         <word-translation *ngFor="let entry of dictionary.entries"
             [dictionaryEntry]="entry"
             (onRemoveWord)="removeWord($event)">
         </word-translation>
         <div class="form-group">
-            <div class="col-lg-10">
-                <i class="fa fa-plus-square fa-3x" (click)="addWord()" aria-hidden="true"></i>
+            <div>
+                <a href="javascript:void(0)" (click)="addWord()" class="btn btn-info">Add Phrase</a>
             </div>
         </div>
         
-        <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
+        <div class="form-group bottom">
+            <div>
                 <button type="button" class="btn btn-default" [routerLink]="['']">Cancel</button>
-                <button type="button" class="btn btn-primary" (click)="create()">Submit</button>
+                <button type="button" id="save" class="btn btn-success" (click)="create()">Save</button>
             </div>
         </div>
     </fieldset>

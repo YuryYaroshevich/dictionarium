@@ -8,7 +8,7 @@ export class DictionaryForm {
     dictionary: Dictionary;
     
     addWord() {
-        this.dictionary.entries.push(new DictionaryEntry('', ''))
+        this.dictionary.entries.push(new DictionaryEntry('', '', ''))
     }
     
     removeWord(deletedEntry: DictionaryEntry) {

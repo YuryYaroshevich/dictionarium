@@ -1,5 +1,9 @@
 <div class="content" *ngIf="dictionary">
     <h3 class="dictionary-name">{{dictionary.name}}</h3>
+    <div id="usage-link" *ngIf="dictionary.link">
+        <a href="{{dictionary.link}}" target="_blank" 
+                        class="text-info without-decoration">usage link</a>
+    </div>
     <div class="pairs">
         <table>
             <tr *ngFor="let entry of dictionary.entries">
@@ -12,9 +16,17 @@
                 <td>
                     <i class="fa fa-minus-circle fa-2x" (click)="removeWord(entry)" aria-hidden="true"></i>
                 </td>
+                <td>
+                    <a *ngIf="entry.link" href="{{entry.link}}" target="_blank" 
+                        class="text-info without-decoration">Usage link</a>
+                    <a *ngIf="!entry.link && !entry.attachLinkToEntry" href="javascript:void(0)"
+                        class="btn btn-info btn-xs" (click)="attachLink(entry)">Attach Link</a>
+                    <input *ngIf="entry.attachLinkToEntry && !entry.link" class="form-control"
+                        [(ngModel)]="entry.link" placeholder="link" /> 
+                </td>
             </tr>
             <tr>
-                <td colspan="3" class="add-word-button">
+                <td colspan="4" class="add-word-button">
                     <i class="fa fa-plus-circle fa-3x" (click)="addWord()" aria-hidden="true"></i>
                 </td>
             </tr>

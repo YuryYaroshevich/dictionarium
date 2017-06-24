@@ -1,0 +1,39 @@
+#create-dictionary {
+    width: 80%;
+    margin: 0px auto;
+}
+
+#dictionary-name {
+    width: 50%;
+}
+#languange {
+    width: 29%;
+}
+#dictionary-link {
+    width: 50%;
+}
+
+.dictionary-entry {
+    width: 70%;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+i {
+    position: absolute;
+    right: -50px;
+    top: 52px;
+}
+
+.translation {
+    margin-top: 10px;
+}
+
+.bottom {
+    margin-top: 50px;
+}
+
+#save {
+    margin-left: 10px;
+}
+

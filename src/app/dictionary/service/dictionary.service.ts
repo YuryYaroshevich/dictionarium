@@ -7,17 +7,6 @@ import 'rxjs/add/operator/map';
 import { Dictionary } from '../model/dictionary';
 import { DictionaryEntry } from '../model/dictionary-entry';
 
-const dictionaries: Dictionary[] = [
-    new Dictionary({id: 1, name: 'sport', language: 'en-gb', 
-        entries: [new DictionaryEntry('football', 'футбол'), new DictionaryEntry('ball', 'мяч')]}),
-    new Dictionary({id: 2, name: 'food', language: 'en-gb',
-        entries: [new DictionaryEntry('bread', 'хлеб'), new DictionaryEntry('sweet', 'конфета')]}),
-    new Dictionary({id: 3, name: 'art', language: 'en-gb',
-        entries: [new DictionaryEntry('picture', 'картина'), new DictionaryEntry('painter', 'художник')]})
-];
-
-//let dictionariesPromise = Promise.resolve(dictionaries);
-
 @Injectable()
 export class DictionaryService {
     private dictionaryUrl = 'http://localhost:8081/dictionary';

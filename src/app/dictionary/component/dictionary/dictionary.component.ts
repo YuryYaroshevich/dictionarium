@@ -38,6 +38,10 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
             );
     }
 
+    attachLink(entry: DictionaryEntry) {
+        entry.attachLinkToEntry = true;
+    }
+
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
