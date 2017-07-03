@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Dictionary } from '../../model/dictionary';
 import { DictionaryEntry } from '../../model/dictionary-entry';
 import { DictionaryService } from '../../service/dictionary.service';
 import { DictionaryForm } from '../new-dictionary/dictionary-form';
@@ -33,13 +31,13 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
     save() {
         this.dictionaryService.updateDictionary(this.dictionary)
             .subscribe(
-                dictionary => this.ngOnInit(),//this.router.navigate(['dictionary', dictionary.id]),
+                dictionary => this.ngOnInit(),
                 error => console.log(error)
             );
     }
 
-    attachLink(entry: DictionaryEntry) {
-        entry.attachLinkToEntry = true;
+    addExample(entry: DictionaryEntry) {
+        entry.addExampleToEntry = true;
     }
 
     ngOnDestroy() {

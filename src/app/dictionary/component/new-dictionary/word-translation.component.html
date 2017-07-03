@@ -7,12 +7,12 @@
         <label>Translation</label>
         <input type="text" class="form-control" [(ngModel)]="dictionaryEntry.translation" placeholder="translation">
     </div>
-    <div class="add-link" *ngIf="!dictionaryEntry.isLinked">
-        <a href="javascript:void(0)" (click)="addLink()" class="text-info without-decoration">Add link</a>
+    <div class="add-example" *ngIf="!dictionaryEntry.hasExample">
+        <a href="javascript:void(0)" (click)="addExample()" class="text-info without-decoration">Add example</a>
     </div>
-    <div class="link" *ngIf="dictionaryEntry.isLinked">
-        <label>Link</label>
-        <input type="text" class="form-control sm-input" [(ngModel)]="dictionaryEntry.link" placeholder="link">
+    <div class="example" *ngIf="dictionaryEntry.hasExample">
+        <label>Example</label>
+        <input type="text" class="form-control sm-input" [(ngModel)]="dictionaryEntry.example" placeholder="example">
     </div>
     <i class="fa fa-minus-circle fa-3x" (click)="removeWord()" aria-hidden="true"></i>
 </div>

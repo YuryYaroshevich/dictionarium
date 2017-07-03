@@ -6,23 +6,23 @@
     </div>
     <div class="pairs">
         <table>
+            <tr><th>phrase</th><th>translation</th><th>example</th></tr>
             <tr *ngFor="let entry of dictionary.entries">
                 <td>
-                    <input class="form-control " [(ngModel)]="entry.phrase" placeholder="phrase" />
+                    <input class="form-control" [(ngModel)]="entry.phrase" placeholder="phrase" />
                 </td>
                 <td>
-                    <input class="form-control " [(ngModel)]="entry.translation" placeholder="translation" />
+                    <input class="form-control" [(ngModel)]="entry.translation" placeholder="translation" />
+                </td>
+                <td>
+                    <a *ngIf="!entry.addExampleToEntry && !entry.example" href="javascript:void(0)"
+                       class="btn btn-info btn-xs" (click)="addExample(entry)">Add example</a>
+                    <input *ngIf="entry.addExampleToEntry || entry.example" class="form-control"
+                           [(ngModel)]="entry.example"
+                           placeholder="example" />
                 </td>
                 <td>
                     <i class="fa fa-minus-circle fa-2x" (click)="removeWord(entry)" aria-hidden="true"></i>
-                </td>
-                <td>
-                    <a *ngIf="entry.link" href="{{entry.link}}" target="_blank" 
-                        class="text-info without-decoration">Usage link</a>
-                    <a *ngIf="!entry.link && !entry.attachLinkToEntry" href="javascript:void(0)"
-                        class="btn btn-info btn-xs" (click)="attachLink(entry)">Attach Link</a>
-                    <input *ngIf="entry.attachLinkToEntry && !entry.link" class="form-control"
-                        [(ngModel)]="entry.link" placeholder="link" /> 
                 </td>
             </tr>
             <tr>

@@ -20,7 +20,7 @@ i.arrow:hover, i.say:hover {
     cursor: pointer;
 }
 
-div.flashcard > strong {
+div.flashcard > div.entry {
     display: table-cell;
     vertical-align: middle;
     font-size: x-large;

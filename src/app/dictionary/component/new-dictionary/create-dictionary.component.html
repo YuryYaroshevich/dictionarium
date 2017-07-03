@@ -11,18 +11,11 @@
             <div>
                 <label>Language</label>
                 <select class="form-control" [(ngModel)]="dictionary.language" placeholder="Language">
-                    <option value="en-gb">English</option>
+                    <option selected="selected" value="en-gb">English</option>
                     <option value="fr-fr">French</option>
                     <option value="de-de">German</option>
                     <option value="es-es">Spanish</option>
                 </select>
-            </div>
-        </div>
-
-        <div id="dictionary-link" class="form-group">
-            <div>
-                <label>Link</label>
-                <input type="text" class="form-control" [(ngModel)]="dictionary.link" placeholder="Link">
             </div>
         </div>
 

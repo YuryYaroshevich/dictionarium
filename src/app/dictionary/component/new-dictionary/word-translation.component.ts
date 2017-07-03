@@ -14,7 +14,7 @@ export class WordTranslationComponent {
         this.onRemoveWord.emit(this.dictionaryEntry);
     }
 
-    addLink() {
-        this.dictionaryEntry.isLinked = true;
+    addExample() {
+        this.dictionaryEntry.hasExample = true;
     }
 }

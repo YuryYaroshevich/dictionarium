@@ -1,11 +1,17 @@
 <div class="flashcards">
     <div class="panel panel-default flashcard" *ngIf="isWord">
-        <strong>{{word}}</strong>
-        <br>
+        <div class="entry">
+            <strong>{{word}}</strong>
+            <br>
+            <span>{{example}}</span>
+        </div>
         <i class="fa fa-volume-up fa-3x say" aria-hidden="true" (click)="pronounce(word)"></i>
+
     </div>
     <div class="panel panel-default flashcard" *ngIf="isTranslation">
-        <strong>{{translation}}</strong>
+        <div class="entry">
+            <strong>{{translation}}</strong>
+        </div>
     </div>
     <div id="arrows">
         <i class="fa fa-arrow-circle-o-left fa-3x arrow" aria-hidden="true" (click)="previous()"></i>

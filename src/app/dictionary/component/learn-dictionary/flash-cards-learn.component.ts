@@ -18,6 +18,7 @@ export class FlashCardsLearnComponent implements OnChanges {
     dictionaryEntries: DictionaryEntry[];
     word: string;
     translation: string;
+    example: string;
     isWord: boolean;
     isTranslation: boolean;
     pairIndex: number;
@@ -67,8 +68,10 @@ export class FlashCardsLearnComponent implements OnChanges {
     }
     
     private initWordAndTranslation(): void {
-        this.word = this.dictionaryEntries[this.pairIndex].phrase;
-        this.translation = this.dictionaryEntries[this.pairIndex].translation;
+        let entry = this.dictionaryEntries[this.pairIndex];
+        this.word = entry.phrase;
+        this.translation = entry.translation;
+        this.example = entry.example;
     }
 
     private showWord(): void {
