@@ -13,7 +13,10 @@
                              (startNewLearning)="startNewLearning($event)"></repeat-learning>
         </tab>
         <tab tabTitle="Matcher">
-            <h2>Matcher</h2>
+            <matcher-learn *ngIf="learningInProgress" [dictionary]="dictionary"
+                             (learningFinished)="learningFinishedEvent($event)"></matcher-learn>
+            <repeat-learning *ngIf="!learningInProgress"
+                             (startNewLearning)="startNewLearning($event)"></repeat-learning>
         </tab>
         <tab tabTitle="Dictation">
             <dictation-learn *ngIf="learningInProgress" [dictionary]="dictionary"
