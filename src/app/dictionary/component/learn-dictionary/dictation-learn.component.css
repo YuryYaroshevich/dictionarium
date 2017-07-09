@@ -1,0 +1,23 @@
+#user-input {
+    width: 40%;
+    margin: 10px auto;
+}
+
+#mistake-message-container {
+    margin-top: 15px;
+}
+#mistake-message, #hint {
+    width: 40%;
+    margin: auto auto;
+}
+
+#cheer-up {
+    width: 20%;
+    margin: auto auto;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#speaker {
+    margin-top: 10px;
+}

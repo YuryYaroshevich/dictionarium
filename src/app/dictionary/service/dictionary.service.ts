@@ -5,7 +5,6 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { Dictionary } from '../model/dictionary';
-import { DictionaryEntry } from '../model/dictionary-entry';
 
 @Injectable()
 export class DictionaryService {

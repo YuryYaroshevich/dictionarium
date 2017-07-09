@@ -10,6 +10,7 @@ import { DictionaryListComponent } from './app/dictionary/component/dictionary-l
 import { DictionaryComponent } from './app/dictionary/component/dictionary/dictionary.component';
 import { LearnDictionaryComponent } from './app/dictionary/component/learn-dictionary/learn-dictionary.component';
 import { FlashCardsLearnComponent } from './app/dictionary/component/learn-dictionary/flash-cards-learn.component';
+import { FlashCardsWritingComponent } from './app/dictionary/component/learn-dictionary/flash-cards-writing.component';
 import { RepeatLearningComponent } from './app/dictionary/component/learn-dictionary/repeat-learning.component';
 import { Tabs } from './app/dictionary/component/learn-dictionary/tabs.component';
 import { Tab } from './app/dictionary/component/learn-dictionary/tab.component';
@@ -18,14 +19,17 @@ import { EditDictionaryComponent } from './app/dictionary/component/new-dictiona
 import { WordTranslationComponent } from './app/dictionary/component/new-dictionary/word-translation.component';
 import { DictionaryService } from './app/dictionary/service/dictionary.service';
 import { PronounceService } from './app/dictionary/service/pronounce.service';
+import { ActiveLearnTabService } from './app/dictionary/service/active-learn-tab.service';
+import {DictationLearnComponent} from "./app/dictionary/component/learn-dictionary/dictation-learn.component";
 
 @NgModule({
   imports: [ BrowserModule, HttpModule, FormsModule, ROUTING ],
-  declarations: [ MyApp, DictionaryListComponent, 
-                  DictionaryComponent, LearnDictionaryComponent, FlashCardsLearnComponent, 
-                  CreateDictionaryComponent, EditDictionaryComponent,
-                  WordTranslationComponent, Tabs, Tab, RepeatLearningComponent],
+  declarations: [ MyApp, DictionaryListComponent,
+                  DictionaryComponent, LearnDictionaryComponent, FlashCardsLearnComponent,
+                  FlashCardsWritingComponent, CreateDictionaryComponent,
+                  EditDictionaryComponent, WordTranslationComponent, Tabs, Tab,
+                  RepeatLearningComponent, DictationLearnComponent],
   bootstrap: [ MyApp ],
-  providers: [DictionaryService, PronounceService]
+  providers: [DictionaryService, PronounceService, ActiveLearnTabService]
 })
 export class AppModule {}

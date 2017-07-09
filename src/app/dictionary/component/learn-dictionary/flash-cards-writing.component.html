@@ -1,0 +1,16 @@
+<div class="panel panel-default flashcard">
+    <div class="entry">
+        <strong>{{currentEntry.translation}}</strong>
+    </div>
+</div>
+<input type="text" class="form-control user-input" (keyup.enter)="check()"
+       [(ngModel)]="userInput" placeholder="translation">
+<div id="mistake-message-container" *ngIf="incorrectInput">
+    <div id="mistake-message" *ngIf="!hint" class="alert alert-dismissible alert-danger">
+        Your input is incorrect. Try again or see a
+        <a href="javascript:void(0)" class="alert-link" (click)="showHint()">hint</a>
+    </div>
+    <div id="hint" *ngIf="hint" class="alert alert-dismissible alert-success">
+        <strong>{{currentEntry.phrase}}</strong>
+    </div>
+</div>

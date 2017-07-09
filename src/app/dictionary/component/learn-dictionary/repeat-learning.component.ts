@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, EventEmitter, Output } from '@angular/core';
+import { Component, HostListener, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'repeat-learning',
@@ -10,5 +10,12 @@ export class RepeatLearningComponent {
 
     newLearning() {
         this.startNewLearning.emit();
+    }
+
+    @HostListener('document:keydown', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent): void {
+        if (event.key === "Enter") {
+            this.newLearning();
+        }
     }
 }

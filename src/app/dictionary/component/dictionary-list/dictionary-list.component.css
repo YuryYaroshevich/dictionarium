@@ -2,3 +2,11 @@
     float: right;
     margin-left: 20px;
 }
+
+.dictionary-name {
+    font-size: medium;
+}
+
+.no-underline {
+    text-decoration: none;
+}

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { Params, Router } from '@angular/router';
 
 import { Dictionary } from '../../model/dictionary';
-import { DictionaryEntry } from '../../model/dictionary-entry';
 import { DictionaryService } from '../../service/dictionary.service';
 
 @Component({
@@ -13,8 +11,7 @@ import { DictionaryService } from '../../service/dictionary.service';
 export class DictionaryListComponent {
   dictionaries: Dictionary[];
   errorMessage: String;
-  constructor(private dictionaryService: DictionaryService,
-              private router: Router) {}
+  constructor(private dictionaryService: DictionaryService) {}
 
   ngOnInit():void {
     this.dictionaryService.getDictionaries()

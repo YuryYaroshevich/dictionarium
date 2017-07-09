@@ -1,0 +1,21 @@
+<i id="speaker" class="fa fa-volume-up fa-3x say" aria-hidden="true" (click)="pronounce()"></i>
+
+<input id="user-input" type="text" class="form-control user-input" (keyup.enter)="check()"
+       [(ngModel)]="userInput" placeholder="phrase">
+
+<div id="mistake-message-container" *ngIf="incorrectInput">
+    <div id="mistake-message" *ngIf="!hint" class="alert alert-dismissible alert-danger">
+        Your input is incorrect. Try again or see a
+        <a href="javascript:void(0)" class="alert-link" (click)="showHint()">hint</a>
+    </div>
+    <div id="hint" *ngIf="hint" class="alert alert-dismissible alert-success">
+        <strong>{{currentEntry.phrase}}</strong>
+    </div>
+</div>
+
+<div id="cheer-up" *ngIf="cheerUp" class="alert alert-dismissible alert-success">
+    <strong>Welldone!</strong>
+</div>
+
+<a *ngIf="!dictationStarted" href="javascript:void(0)"
+   (click)="startDictation()" class="btn btn-info">Start dictation</a>

@@ -1,0 +1,27 @@
+div.flashcard {
+    margin: 2% auto;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    display: table;
+    position: relative;
+}
+
+div.flashcard > div.entry {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: x-large;
+}
+
+.user-input {
+    width: 40%;
+    margin: 0px auto;
+}
+
+#mistake-message-container {
+    margin-top: 15px;
+}
+#mistake-message, #hint {
+    width: 40%;
+    margin: auto auto;
+}

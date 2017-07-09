@@ -7,7 +7,7 @@ export class PronounceService {
 
     pronounce(word: string, language: string): void {
         VoiceRSS.speech({
-            key: '84afb111b14d4b08b4147120b4e9b62d',
+            key: '15570a3a9db4423897a02a4296eb8431',
             src: word,
             hl: language,
             r: 0, 

@@ -1,21 +1,19 @@
 <div class="flashcards">
-    <div class="panel panel-default flashcard" *ngIf="isWord">
-        <div class="entry">
+    <div class="panel panel-default flashcard"
+         (click)="flip()">
+        <div *ngIf="isWord" class="entry">
             <strong>{{word}}</strong>
             <br>
             <span>{{example}}</span>
         </div>
-        <i class="fa fa-volume-up fa-3x say" aria-hidden="true" (click)="pronounce(word)"></i>
-
-    </div>
-    <div class="panel panel-default flashcard" *ngIf="isTranslation">
-        <div class="entry">
+        <div *ngIf="isTranslation" class="entry">
             <strong>{{translation}}</strong>
         </div>
     </div>
     <div id="arrows">
-        <i class="fa fa-arrow-circle-o-left fa-3x arrow" aria-hidden="true" (click)="previous()"></i>
-        <i class="fa fa-arrow-circle-o-right fa-3x arrow" aria-hidden="true" (click)="next()"></i>
-    </div>    
-    <a href="javascript:void(0)" id="translate" class="btn btn-primary btn-lg" (click)="translate()">Translate</a>
+        <i class="fa fa-arrow-circle-o-left fa-3x arrow"
+           aria-hidden="true" (click)="previous()"></i>
+        <i class="fa fa-arrow-circle-o-right fa-3x arrow"
+           aria-hidden="true" (click)="next()"></i>
+    </div>
 </div>

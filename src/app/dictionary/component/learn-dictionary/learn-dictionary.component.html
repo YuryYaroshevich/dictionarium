@@ -1,5 +1,5 @@
 <div class="learn-container" *ngIf="dictionary">
-    <tabs>
+    <tabs (onTabSelection)="startNewLearning()">
         <tab tabTitle="Flashcards">
             <flash-cards-learn *ngIf="learningInProgress" [dictionary]="dictionary" 
                 (learningFinished)="learningFinishedEvent($event)"></flash-cards-learn>
@@ -7,13 +7,19 @@
                 (startNewLearning)="startNewLearning($event)"></repeat-learning>
         </tab>
         <tab tabTitle="Flashcards with writing">
-            <h2>Flashcards with writing</h2>
+            <flash-cards-writing *ngIf="learningInProgress" [dictionary]="dictionary"
+                (learningFinished)="learningFinishedEvent($event)"></flash-cards-writing>
+            <repeat-learning *ngIf="!learningInProgress"
+                             (startNewLearning)="startNewLearning($event)"></repeat-learning>
         </tab>
         <tab tabTitle="Matcher">
             <h2>Matcher</h2>
         </tab>
         <tab tabTitle="Dictation">
-            <h2>Dictation</h2>
+            <dictation-learn *ngIf="learningInProgress" [dictionary]="dictionary"
+                                 (learningFinished)="learningFinishedEvent($event)"></dictation-learn>
+            <repeat-learning *ngIf="!learningInProgress"
+                             (startNewLearning)="startNewLearning($event)"></repeat-learning>
         </tab>
     </tabs>
     <a href="javascript:void(0)" [routerLink]="['/dictionary', dictionary.id]"
