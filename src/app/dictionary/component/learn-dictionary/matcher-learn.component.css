@@ -1,0 +1,14 @@
+.hint {
+    width: 20%;
+    margin: 15px auto 20px auto;
+}
+.hint p {
+    margin-bottom: 0px;
+}
+
+.panel-body {
+    padding: 6px;
+}
+.panel {
+    margin-bottom: 10px;
+}

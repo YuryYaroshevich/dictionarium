@@ -1,23 +1,27 @@
-<h4>Simple Drag-and-Drop</h4>
+<div class="well well-sm hint">
+    <p class="text-primary">drag from left to right</p>
+</div>
+
 <div class="row">
-    <div class="col-sm-3">
-        <div class="panel panel-success">
-            <div class="panel-heading">Available to drag</div>
-            <div class="panel-body">
-                <div class="panel panel-default" dnd-draggable [dragEnabled]="true">
-                    <div class="panel-body">
-                        <div>Drag Me</div>
-                    </div>
+    <div class="col-md-4 col-md-offset-2">
+        <ng-container *ngFor="let entry of dictionaryEntriesLeft">
+            <div *ngIf="!entry.disappear" class="panel panel-default"
+                 dnd-draggable [dragEnabled]="true"
+                 [dragData]="entry">
+                <div class="panel-body">
+                    <div>{{entry.phrase}}</div>
                 </div>
             </div>
-        </div>
+        </ng-container>
     </div>
-    <div class="col-sm-3">
-        <div dnd-droppable class="panel panel-info" (onDropSuccess)="simpleDrop=$event">
-            <div class="panel-heading">Place to drop</div>
-            <div class="panel-body">
-                <div *ngIf="simpleDrop">Item was dropped here</div>
+    <div class="col-md-4">
+        <ng-container *ngFor="let entry of dictionaryEntriesRight">
+            <div *ngIf="!entry.disappear" dnd-droppable class="panel panel-default"
+                 [allowDrop]="isValid(entry)">
+                <div class="panel-body">
+                    <div>{{entry.translation}}</div>
+                </div>
             </div>
-        </div>
+        </ng-container>
     </div>
 </div>
