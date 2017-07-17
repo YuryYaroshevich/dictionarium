@@ -24,6 +24,12 @@
             <repeat-learning *ngIf="!learningInProgress"
                              (startNewLearning)="startNewLearning($event)"></repeat-learning>
         </tab>
+        <tab tabTitle="Clicker">
+            <clicker-learn *ngIf="learningInProgress" [dictionary]="dictionary"
+                             (learningFinished)="learningFinishedEvent($event)"></clicker-learn>
+            <repeat-learning *ngIf="!learningInProgress"
+                             (startNewLearning)="startNewLearning($event)"></repeat-learning>
+        </tab>
     </tabs>
     <a href="javascript:void(0)" [routerLink]="['/dictionary', dictionary.id]"
         class="btn btn-default">Back to dictionary</a>

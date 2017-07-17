@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, Input, Output} from "@angular/core";
+import {Component, EventEmitter, HostListener, Input, OnChanges, Output} from "@angular/core";
 
 import {ActiveLearnTabService} from "../../service/active-learn-tab.service";
 import {DictionaryEntry} from "../../model/dictionary-entry";
@@ -13,7 +13,7 @@ import * as _ from 'lodash';
     templateUrl: 'dictation-learn.component.html',
     styleUrls: ['dictation-learn.component.css']
 })
-export class DictationLearnComponent extends AbstractLearnComponent {
+export class DictationLearnComponent extends AbstractLearnComponent implements OnChanges {
     @Input() dictionary: Dictionary;
     dictionaryEntries: DictionaryEntry[];
     currentEntry: DictionaryEntry;

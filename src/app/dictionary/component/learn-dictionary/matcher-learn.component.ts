@@ -5,7 +5,9 @@ import {AbstractLearnComponent} from "./abstract-learn.component";
 
 import * as _ from 'lodash';
 
-
+// TODO: add paging concept: if dictionary bigger than X size, divide it into blocks and
+// render these blocks one after another. That is if user solved one block then show him
+// the second one and so on.
 @Component({
     selector: 'matcher-learn',
     templateUrl: 'matcher-learn.component.html',

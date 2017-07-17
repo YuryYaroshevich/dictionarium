@@ -1,0 +1,17 @@
+.error {
+    color: red;
+}
+
+.entry:hover {
+    cursor: pointer;
+}
+
+.word-to-guess {
+    width: 30%;
+    margin: 15px auto 30px auto;
+    font-size: x-large;
+}
+
+#words-table {
+    margin: 0px auto 0px auto;
+}

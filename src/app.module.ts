@@ -22,6 +22,7 @@ import {ActiveLearnTabService} from "./app/dictionary/service/active-learn-tab.s
 import {DictationLearnComponent} from "./app/dictionary/component/learn-dictionary/dictation-learn.component";
 import {DndModule} from 'ng2-dnd';
 import {MatcherLearnComponent} from "./app/dictionary/component/learn-dictionary/matcher-learn.component";
+import {ClickerLearnComponent} from "./app/dictionary/component/learn-dictionary/clicker-learn.component";
 
 @NgModule({
   imports: [ BrowserModule, HttpModule, FormsModule, ROUTING, DndModule.forRoot() ],
@@ -29,7 +30,8 @@ import {MatcherLearnComponent} from "./app/dictionary/component/learn-dictionary
                   DictionaryComponent, LearnDictionaryComponent, FlashCardsLearnComponent,
                   FlashCardsWritingComponent, CreateDictionaryComponent,
                   EditDictionaryComponent, WordTranslationComponent, Tabs, Tab,
-                  RepeatLearningComponent, DictationLearnComponent, MatcherLearnComponent],
+                  RepeatLearningComponent, DictationLearnComponent, MatcherLearnComponent,
+                  ClickerLearnComponent],
   bootstrap: [ MyApp ],
   providers: [DictionaryService, PronounceService, ActiveLearnTabService]
 })

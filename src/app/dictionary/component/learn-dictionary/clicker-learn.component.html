@@ -1,0 +1,19 @@
+<div class="panel panel-default word-to-guess">
+    <div class="panel-body">
+        {{currentEntry.translation}}
+    </div>
+</div>
+<table id="words-table">
+    <tr *ngFor="let row of clickEntryRows">
+        <td *ngFor="let entry of row">
+
+            <div class="panel panel-default entry" (click)="check(entry)"
+                 *ngIf="!entry.disappear">
+                <div class="panel-body" [ngClass]="{'error': entry.error}">
+                    {{entry.phrase}}
+                </div>
+            </div>
+
+        </td>
+    </tr>
+</table>
