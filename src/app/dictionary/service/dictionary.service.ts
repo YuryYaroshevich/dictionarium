@@ -12,8 +12,18 @@ export class DictionaryService {
 
     constructor(private http: Http) {}
 
-    getDictionaries(): Observable<Dictionary[]> {
+    /*getDictionaries(): Observable<Dictionary[]> {
         return this.http.get(this.dictionaryUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }*/
+
+    getDictionaries(ids?: string): Observable<Dictionary[]> {
+        let url: string = this.dictionaryUrl;
+        if (ids) {
+            url += '?ids=' + ids;
+        }
+        return this.http.get(url)
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -24,8 +34,6 @@ export class DictionaryService {
     }
 
     saveDictionary(dictionary: Dictionary): Observable<Dictionary> {
-        //dictionary.id = Math.random();
-        //dictionaries.push(dictionary);
         return this.http.post(this.dictionaryUrl, dictionary)
                         .map(this.extractData)
                         .catch(this.handleError);

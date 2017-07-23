@@ -31,6 +31,7 @@
                              (startNewLearning)="startNewLearning($event)"></repeat-learning>
         </tab>
     </tabs>
-    <a href="javascript:void(0)" [routerLink]="['/dictionary', dictionary.id]"
-        class="btn btn-default">Back to dictionary</a>
+    <a href="javascript:void(0)" *ngIf="!combinedDictionaryMode"
+       [routerLink]="['/dictionary', dictionary.id]"
+       class="btn btn-default">Back to dictionary</a>
 </div>

@@ -20,9 +20,10 @@ import {DictionaryService} from "./app/dictionary/service/dictionary.service";
 import {PronounceService} from "./app/dictionary/service/pronounce.service";
 import {ActiveLearnTabService} from "./app/dictionary/service/active-learn-tab.service";
 import {DictationLearnComponent} from "./app/dictionary/component/learn-dictionary/dictation-learn.component";
-import {DndModule} from 'ng2-dnd';
+import {DndModule} from "ng2-dnd";
 import {MatcherLearnComponent} from "./app/dictionary/component/learn-dictionary/matcher-learn.component";
 import {ClickerLearnComponent} from "./app/dictionary/component/learn-dictionary/clicker-learn.component";
+import {LearnConstructorComponent} from "./app/dictionary/component/learn-dictionary/learn-constructor.component";
 
 @NgModule({
   imports: [ BrowserModule, HttpModule, FormsModule, ROUTING, DndModule.forRoot() ],

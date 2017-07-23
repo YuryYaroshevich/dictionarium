@@ -1,6 +1,9 @@
 <div *ngFor="let dictionary of dictionaries">
   <div class="panel panel-default">
     <div class="panel-body">
+      <input type="checkbox" value="" class="learn-checkbox"
+             (change)="onLearnCheckboxClick(dictionary.id, $event.target.checked)"
+             *ngIf="selectForLearnMode">
       <a class="dictionary-name no-underline" href="javascript:void(0)"
          [routerLink]="['/dictionary', dictionary.id]">
         {{dictionary.name}}
@@ -14,6 +17,11 @@
     </div>
   </div>  
 </div>
+<a href="javascript:void(0)" class="btn btn-info"
+   (click)="selectForLearn()" *ngIf="!selectForLearnMode">Select for learn</a>
+<a href="javascript:void(0)" class="btn btn-info"
+   (click)="learn()" *ngIf="selectForLearnMode">Learn</a>
+
 <!--<div *ngIf="!dictionaries?.length === 0">
   You haven't dictionaries created yet.
 </div>-->
