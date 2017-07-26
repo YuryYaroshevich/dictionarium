@@ -9,6 +9,11 @@
             <tr><th>phrase</th><th>translation</th><th>example</th></tr>
             <tr *ngFor="let entry of dictionary.entries">
                 <td>
+                    <input type="checkbox" value="" class="extract-checkbox"
+                           (change)="onExtractCheckboxClick(dictionary.id, $event.target.checked)"
+                           *ngIf="extractModeOn">
+                </td>
+                <td>
                     <input class="form-control" [(ngModel)]="entry.phrase" placeholder="phrase" />
                 </td>
                 <td>
@@ -37,4 +42,9 @@
         <a href="javascript:void(0)" [routerLink]="['learn']" class="btn btn-info">Learn</a>
         <a href="javascript:void(0)" (click)="save()" class="btn btn-primary">Save</a>
     </div>
+    <a href="javascript:void(0)" *ngIf="!extractModeOn" (click)="extractMode()"
+       class="btn btn-primary">Extract new dictionary</a>
+    <a href="javascript:void(0)" *ngIf="extractModeOn" (click)="extractNewDictionary()"
+       class="btn btn-primary">Extract</a>
+
 </div>

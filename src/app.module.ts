@@ -23,7 +23,6 @@ import {DictationLearnComponent} from "./app/dictionary/component/learn-dictiona
 import {DndModule} from "ng2-dnd";
 import {MatcherLearnComponent} from "./app/dictionary/component/learn-dictionary/matcher-learn.component";
 import {ClickerLearnComponent} from "./app/dictionary/component/learn-dictionary/clicker-learn.component";
-import {LearnConstructorComponent} from "./app/dictionary/component/learn-dictionary/learn-constructor.component";
 
 @NgModule({
   imports: [ BrowserModule, HttpModule, FormsModule, ROUTING, DndModule.forRoot() ],

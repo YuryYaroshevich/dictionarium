@@ -11,6 +11,9 @@ import { DictionaryForm } from '../new-dictionary/dictionary-form';
     styleUrls: ['dictionary.component.css']
 })
 export class DictionaryComponent extends DictionaryForm implements OnInit, OnDestroy {
+    extractModeOn: boolean = false;
+    selectedForExtraction: string[] = [];
+
     constructor(private dictionaryService: DictionaryService,
                 private activatedRoute: ActivatedRoute,
                 private router: Router) {
@@ -38,6 +41,23 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
 
     addExample(entry: DictionaryEntry) {
         entry.addExampleToEntry = true;
+    }
+
+    extractMode(): void {
+        this.extractModeOn = true;
+    }
+
+    onExtractCheckboxClick(dictionaryId: string, isChecked: boolean): void {
+        if (isChecked) {
+            this.selectedForExtraction.push(dictionaryId);
+        } else {
+            this.selectedForExtraction = this.selectedForExtraction
+                .filter(id => id !== dictionaryId);
+        }
+    }
+
+    extractNewDictionary() {
+
     }
 
     ngOnDestroy() {
