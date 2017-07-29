@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as _ from 'lodash';
 
 import { DictionaryEntry } from '../../model/dictionary-entry';
 import { DictionaryService } from '../../service/dictionary.service';
 import { DictionaryForm } from '../new-dictionary/dictionary-form';
+import {Dictionary} from "../../model/dictionary";
+
 
 @Component({
     selector: 'dictionary',
@@ -12,7 +15,8 @@ import { DictionaryForm } from '../new-dictionary/dictionary-form';
 })
 export class DictionaryComponent extends DictionaryForm implements OnInit, OnDestroy {
     extractModeOn: boolean = false;
-    selectedForExtraction: string[] = [];
+    selectedForExtraction: DictionaryEntry[] = [];
+    newDictionaryName: string;
 
     constructor(private dictionaryService: DictionaryService,
                 private activatedRoute: ActivatedRoute,
@@ -47,17 +51,30 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
         this.extractModeOn = true;
     }
 
-    onExtractCheckboxClick(dictionaryId: string, isChecked: boolean): void {
+    onExtractCheckboxClick(selectedEntry: DictionaryEntry, isChecked: boolean): void {
         if (isChecked) {
-            this.selectedForExtraction.push(dictionaryId);
+            this.selectedForExtraction.push(selectedEntry);
         } else {
             this.selectedForExtraction = this.selectedForExtraction
-                .filter(id => id !== dictionaryId);
+                .filter(entry => entry.phrase !== selectedEntry.phrase);
         }
     }
 
     extractNewDictionary() {
-
+        let extractedDictionary: Dictionary = new Dictionary({
+            name: this.newDictionaryName,
+            language: this.dictionary.language,
+            entries: this.selectedForExtraction
+        });
+        extractedDictionary.entries.forEach(entry => _.remove(this.dictionary.entries, entry));
+        //_.remove(this.dictionary.entries, extractedDictionary.entries);
+        this.dictionaryService
+            .extractNewDictionary(extractedDictionary, this.dictionary)
+            .subscribe(dictionary => {
+                this.dictionary = dictionary;
+                this.extractModeOn = false;
+                console.log('Dictionary was extracted.');
+            }, error => console.log(error));
     }
 
     ngOnDestroy() {

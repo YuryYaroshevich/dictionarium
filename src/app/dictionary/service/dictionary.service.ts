@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -11,12 +11,6 @@ export class DictionaryService {
     private dictionaryUrl = 'http://localhost:8081/dictionary';
 
     constructor(private http: Http) {}
-
-    /*getDictionaries(): Observable<Dictionary[]> {
-        return this.http.get(this.dictionaryUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }*/
 
     getDictionaries(ids?: string): Observable<Dictionary[]> {
         let url: string = this.dictionaryUrl;
@@ -48,6 +42,18 @@ export class DictionaryService {
     deleteDictionary(id: string) {
         let url = this.dictionaryUrl + '/' + id;
         return this.http.delete(url).map(this.extractData).catch(this.handleError);
+    }
+
+    extractNewDictionary(extractedDictionary: Dictionary,
+                         oldDictionary: Dictionary): Observable<Dictionary> {
+        let headers = new Headers({'Content-Type': 'application/json'});
+        return this.http.post(this.dictionaryUrl + '/extract',
+            JSON.stringify({
+                extractedDictionary: extractedDictionary,
+                oldDictionary: oldDictionary
+            }),
+            {headers: headers}
+        ).map(this.extractData).catch(this.handleError);
     }
 
     private extractData(res: Response) {
