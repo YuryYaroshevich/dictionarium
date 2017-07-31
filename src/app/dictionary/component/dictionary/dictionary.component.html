@@ -1,52 +1,74 @@
 <div class="content" *ngIf="dictionary">
     <h3 class="dictionary-name">{{dictionary.name}}</h3>
-    <div id="usage-link" *ngIf="dictionary.link">
-        <a href="{{dictionary.link}}" target="_blank" 
-                        class="text-info without-decoration">usage link</a>
+
+    <div *ngIf="!extractModeOn">
+        <div class="pairs">
+            <table>
+                <tr><th>phrase</th><th>translation</th><th>example</th></tr>
+                <tr *ngFor="let entry of dictionary.entries">
+                    <td>
+                        <input class="form-control" [(ngModel)]="entry.phrase" placeholder="phrase" />
+                    </td>
+                    <td>
+                        <input class="form-control" [(ngModel)]="entry.translation" placeholder="translation" />
+                    </td>
+                    <td>
+                        <a *ngIf="!entry.addExampleToEntry && !entry.example" href="javascript:void(0)"
+                           class="btn btn-info btn-xs" (click)="addExample(entry)">Add example</a>
+                        <input *ngIf="entry.addExampleToEntry || entry.example" class="form-control"
+                               [(ngModel)]="entry.example"
+                               placeholder="example" />
+                    </td>
+                    <td>
+                        <i class="fa fa-minus-circle fa-2x" (click)="removeWord(entry)" aria-hidden="true"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="add-word-button">
+                        <i class="fa fa-plus-circle fa-3x" (click)="addWord()" aria-hidden="true"></i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="buttons">
+            <a href="javascript:void(0)" [routerLink]="['learn']" class="btn btn-info">Learn</a>
+            <a href="javascript:void(0)" (click)="save()" class="btn btn-success">Save</a>
+        </div>
     </div>
-    <div class="pairs">
-        <table>
-            <tr><th *ngIf="extractModeOn"></th><th>phrase</th><th>translation</th><th>example</th><th></th></tr>
-            <tr *ngFor="let entry of dictionary.entries">
-                <td *ngIf="extractModeOn">
-                    <input type="checkbox" value="" class="extract-checkbox"
-                           (change)="onExtractCheckboxClick(entry, $event.target.checked)">
-                </td>
-                <td>
-                    <input class="form-control" [(ngModel)]="entry.phrase" placeholder="phrase" />
-                </td>
-                <td>
-                    <input class="form-control" [(ngModel)]="entry.translation" placeholder="translation" />
-                </td>
-                <td>
-                    <a *ngIf="!entry.addExampleToEntry && !entry.example" href="javascript:void(0)"
-                       class="btn btn-info btn-xs" (click)="addExample(entry)">Add example</a>
-                    <input *ngIf="entry.addExampleToEntry || entry.example" class="form-control"
-                           [(ngModel)]="entry.example"
-                           placeholder="example" />
-                </td>
-                <td *ngIf="!extractModeOn">
-                    <i class="fa fa-minus-circle fa-2x" (click)="removeWord(entry)" aria-hidden="true"></i>
-                </td>
-            </tr>
-            <tr *ngIf="!extractModeOn">
-                <td colspan="4" class="add-word-button">
-                    <i class="fa fa-plus-circle fa-3x" (click)="addWord()" aria-hidden="true"></i>
-                </td>
-            </tr>
-        </table>
-    </div>
-    
-    <div class="buttons" *ngIf="!extractModeOn">
-        <a href="javascript:void(0)" [routerLink]="['learn']" class="btn btn-info">Learn</a>
-        <a href="javascript:void(0)" (click)="save()" class="btn btn-primary">Save</a>
-    </div>
-    <a href="javascript:void(0)" *ngIf="!extractModeOn" (click)="extractMode()"
-       class="btn btn-primary">Extract new dictionary</a>
+
     <div *ngIf="extractModeOn">
-        <input class="form-control" [(ngModel)]="newDictionaryName" placeholder="name" />
+        <div class="pairs">
+            <table>
+                <tr><th></th><th>phrase</th><th>translation</th><th>example</th></tr>
+                <tr *ngFor="let entry of dictionary.entries">
+                    <td *ngIf="extractModeOn">
+                        <input type="checkbox" value="" class="extract-checkbox"
+                               (change)="onExtractCheckboxClick(entry, $event.target.checked)">
+                    </td>
+                    <td>
+                        {{entry.phrase}}
+                    </td>
+                    <td>
+                        {{entry.translation}}
+                    </td>
+                    <td>
+                        {{entry.example}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <a href="javascript:void(0)" *ngIf="!extractModeOn" (click)="extractMode()"
+       id="extract-new-button" class="btn btn-info">Extract new dictionary</a>
+    <div *ngIf="extractModeOn" id="submit-new-dict">
+        <input id="new-dict-name-input" class="form-control"
+               [(ngModel)]="newDictionaryName" placeholder="name" />
         <a href="javascript:void(0)"  (click)="extractNewDictionary()"
-           class="btn btn-primary">Select for new dictionary</a>
+           class="btn btn-success">Create</a>
+        <a href="javascript:void(0)"  (click)="extractModeOff()"
+           class="btn btn-default">Cancel</a>
     </div>
 
 </div>

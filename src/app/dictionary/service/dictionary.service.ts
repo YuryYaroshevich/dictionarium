@@ -12,7 +12,7 @@ export class DictionaryService {
 
     constructor(private http: Http) {}
 
-    getDictionaries(ids?: string): Observable<Dictionary[]> {
+    public getDictionaries(ids?: string): Observable<Dictionary[]> {
         let url: string = this.dictionaryUrl;
         if (ids) {
             url += '?ids=' + ids;
@@ -22,29 +22,29 @@ export class DictionaryService {
             .catch(this.handleError);
     }
 
-    getDictionary(id: number | string): Observable<Dictionary> {
+    public getDictionary(id: number | string): Observable<Dictionary> {
         let url = this.dictionaryUrl + '/' + id;
         return this.http.get(url).map(this.extractData).catch(this.handleError);
     }
 
-    saveDictionary(dictionary: Dictionary): Observable<Dictionary> {
+    public saveDictionary(dictionary: Dictionary): Observable<Dictionary> {
         return this.http.post(this.dictionaryUrl, dictionary)
                         .map(this.extractData)
                         .catch(this.handleError);
     }
 
-    updateDictionary(updatedDictionary: Dictionary): Observable<Dictionary> {
+    public updateDictionary(updatedDictionary: Dictionary): Observable<Dictionary> {
         return this.http.put(this.dictionaryUrl, updatedDictionary)
                         .map(this.extractData)
                         .catch(this.handleError);
     }
 
-    deleteDictionary(id: string) {
+    public deleteDictionary(id: string) {
         let url = this.dictionaryUrl + '/' + id;
         return this.http.delete(url).map(this.extractData).catch(this.handleError);
     }
 
-    extractNewDictionary(extractedDictionary: Dictionary,
+    public extractNewDictionary(extractedDictionary: Dictionary,
                          oldDictionary: Dictionary): Observable<Dictionary> {
         let headers = new Headers({'Content-Type': 'application/json'});
         return this.http.post(this.dictionaryUrl + '/extract',
@@ -54,6 +54,14 @@ export class DictionaryService {
             }),
             {headers: headers}
         ).map(this.extractData).catch(this.handleError);
+    }
+
+    public mergeDictionaries(dictionIdsToMerge: string[], name: string): Observable<Dictionary> {
+        let ids = dictionIdsToMerge.join(',');
+        let url = this.dictionaryUrl + '/merge?ids=' + ids + '&name=' + name;
+        return this.http.put(url, {})
+            .map(this.extractData)
+            .catch(this.handleError);
     }
 
     private extractData(res: Response) {

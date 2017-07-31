@@ -34,3 +34,17 @@ td.add-word-button {
 div.buttons {
     text-align: center;
 }
+
+#extract-new-button {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#new-dict-name-input {
+    width: 50%;
+    margin-bottom: 30px;
+}
+
+#submit-new-dict {
+    margin-left: 20px;
+}

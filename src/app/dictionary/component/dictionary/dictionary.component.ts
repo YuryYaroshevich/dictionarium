@@ -67,7 +67,6 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
             entries: this.selectedForExtraction
         });
         extractedDictionary.entries.forEach(entry => _.remove(this.dictionary.entries, entry));
-        //_.remove(this.dictionary.entries, extractedDictionary.entries);
         this.dictionaryService
             .extractNewDictionary(extractedDictionary, this.dictionary)
             .subscribe(dictionary => {
@@ -75,6 +74,10 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
                 this.extractModeOn = false;
                 console.log('Dictionary was extracted.');
             }, error => console.log(error));
+    }
+
+    extractModeOff() {
+        this.extractModeOn = false;
     }
 
     ngOnDestroy() {

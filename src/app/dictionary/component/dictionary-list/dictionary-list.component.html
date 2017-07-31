@@ -4,6 +4,9 @@
       <input type="checkbox" value="" class="learn-checkbox"
              (change)="onLearnCheckboxClick(dictionary.id, $event.target.checked)"
              *ngIf="selectForLearnMode">
+      <input type="checkbox" value="" class="learn-checkbox"
+             (change)="onMergeCheckboxClick(dictionary.id, $event.target.checked)"
+             *ngIf="selectForMergeMode">
       <a class="dictionary-name no-underline" href="javascript:void(0)"
          [routerLink]="['/dictionary', dictionary.id]">
         {{dictionary.name}}
@@ -17,10 +20,34 @@
     </div>
   </div>  
 </div>
-<a href="javascript:void(0)" class="btn btn-info"
-   (click)="selectForLearn()" *ngIf="!selectForLearnMode">Select for learn</a>
-<a href="javascript:void(0)" class="btn btn-info"
-   (click)="learn()" *ngIf="selectForLearnMode">Learn</a>
+
+<div id="dictionaries-operations">
+  <a href="javascript:void(0)" class="btn btn-info"
+     (click)="selectForLearn()"
+     *ngIf="!selectForLearnMode && !selectForMergeMode" id="select-learn-btn">
+    Select for learn
+  </a>
+  <div *ngIf="selectForLearnMode" id="submit-learn-btn">
+    <a href="javascript:void(0)" class="btn btn-success left-btn"
+       (click)="learn()">Learn</a>
+    <a href="javascript:void(0)" class="btn btn-default"
+       (click)="cancelLearnMode()">Cancel</a>
+  </div>
+
+  <a href="javascript:void(0)" class="btn btn-info"
+     (click)="selectForMerge()"
+     *ngIf="!selectForMergeMode && !selectForLearnMode" id="select-merge-btn">
+    Select for merging
+  </a>
+  <div *ngIf="selectForMergeMode">
+    <input id="new-dict-name-input" class="form-control"
+           [(ngModel)]="newDictionaryName" placeholder="name" />
+    <a href="javascript:void(0)" class="btn btn-success left-btn"
+       (click)="mergeDictionaries()">Merge selected dictionaries</a>
+    <a href="javascript:void(0)" class="btn btn-default"
+       (click)="cancelMergeMode()">Cancel</a>
+  </div>
+</div>
 
 <!--<div *ngIf="!dictionaries?.length === 0">
   You haven't dictionaries created yet.
