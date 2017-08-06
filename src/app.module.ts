@@ -23,9 +23,12 @@ import {DictationLearnComponent} from "./app/dictionary/component/learn-dictiona
 import {DndModule} from "ng2-dnd";
 import {MatcherLearnComponent} from "./app/dictionary/component/learn-dictionary/matcher-learn.component";
 import {ClickerLearnComponent} from "./app/dictionary/component/learn-dictionary/clicker-learn.component";
+import {TagInputModule} from "ng2-tag-input";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
-  imports: [ BrowserModule, HttpModule, FormsModule, ROUTING, DndModule.forRoot() ],
+  imports: [ BrowserModule, HttpModule, FormsModule, ROUTING, DndModule.forRoot(),
+      TagInputModule, BrowserAnimationsModule],
   declarations: [ MyApp, DictionaryListComponent,
                   DictionaryComponent, LearnDictionaryComponent, FlashCardsLearnComponent,
                   FlashCardsWritingComponent, CreateDictionaryComponent,

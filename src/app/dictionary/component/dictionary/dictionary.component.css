@@ -48,3 +48,8 @@ div.buttons {
 #submit-new-dict {
     margin-left: 20px;
 }
+
+#tags {
+    margin: 0px auto 20px auto;
+    width: 100%;
+}

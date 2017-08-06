@@ -17,6 +17,7 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
     extractModeOn: boolean = false;
     selectedForExtraction: DictionaryEntry[] = [];
     newDictionaryName: string;
+    items = ['Pizza', 'Pasta', 'Parmesan'];
 
     constructor(private dictionaryService: DictionaryService,
                 private activatedRoute: ActivatedRoute,

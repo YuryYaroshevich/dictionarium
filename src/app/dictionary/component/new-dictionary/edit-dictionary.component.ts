@@ -1,11 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
 
-import { Dictionary } from '../../model/dictionary';
-import { DictionaryEntry } from '../../model/dictionary-entry';
-import { DictionaryService } from '../../service/dictionary.service';
-import { DictionaryForm } from './dictionary-form';
+import {Dictionary} from "../../model/dictionary";
+import {DictionaryService} from "../../service/dictionary.service";
+import {DictionaryForm} from "./dictionary-form";
 
 @Component({
     selector: 'edit-dictionary',

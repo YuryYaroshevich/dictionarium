@@ -24,6 +24,7 @@ export class CreateDictionaryComponent extends DictionaryForm implements OnInit 
     }
 
     create() {
+        //this.dictionary.tags = this.dictionary.tags.map(tag => tag.display);
         this.dictionaryService.saveDictionary(this.dictionary)
             .subscribe( 
                 dictionary => this.router.navigate(['dictionary', dictionary.id]),

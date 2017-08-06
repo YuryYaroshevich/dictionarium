@@ -31,6 +31,10 @@
             </table>
         </div>
 
+        <div id="tags">
+            <tag-input [(ngModel)]='dictionary.tags' modelAsStrings="true"></tag-input>
+        </div>
+
         <div class="buttons">
             <a href="javascript:void(0)" [routerLink]="['learn']" class="btn btn-info">Learn</a>
             <a href="javascript:void(0)" (click)="save()" class="btn btn-success">Save</a>

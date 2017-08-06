@@ -5,8 +5,8 @@
     "module": "commonjs",
     "noEmit": true,
     "sourceMap": true,
-    "target": "es5",
-    "types": ["es6-shim", "jasmine"]
+    "target": "es6",
+    "lib": ["es5", "es6", "dom"]
   },
   "files": [
     "src/main.ts",
