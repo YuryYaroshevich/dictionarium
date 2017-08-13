@@ -6,6 +6,9 @@ import { DictionaryEntry } from '../../model/dictionary-entry';
 import { DictionaryService } from '../../service/dictionary.service';
 import { DictionaryForm } from '../new-dictionary/dictionary-form';
 import {Dictionary} from "../../model/dictionary";
+import {TagModel} from "ng4-tag-input/dist/modules/components/helpers/accessor";
+import {TagService} from "../../service/tag.service";
+import {Observable} from "rxjs/Observable";
 
 
 @Component({
@@ -17,15 +20,19 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
     extractModeOn: boolean = false;
     selectedForExtraction: DictionaryEntry[] = [];
     newDictionaryName: string;
-    items = ['Pizza', 'Pasta', 'Parmesan'];
+    newTags: string[] = [];
+    removedTags: string[] = [];
 
     constructor(private dictionaryService: DictionaryService,
+                private tagService: TagService,
                 private activatedRoute: ActivatedRoute,
                 private router: Router) {
         super();
     }
 
     ngOnInit(): void {
+        this.removedTags = [];
+        this.newTags = [];
         this.subscription = this.activatedRoute.params.subscribe(
             (params:any) => {
                 this.dictionaryService.getDictionary(params['id'])
@@ -37,7 +44,8 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
     }
 
     save() {
-        this.dictionaryService.updateDictionary(this.dictionary)
+        this.dictionaryService.updateDictionary(this.dictionary,
+                this.newTags, this.removedTags)
             .subscribe(
                 dictionary => this.ngOnInit(),
                 error => console.log(error)
@@ -79,6 +87,18 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
 
     extractModeOff() {
         this.extractModeOn = false;
+    }
+
+    onTagAdd(tag: any): void {
+        this.newTags.push(tag.value);
+    }
+
+    onTagRemove(tag: string): void {
+        this.removedTags.push(tag);
+    }
+
+    findTags(query: string): Observable<string[]> {
+        return this.tagService.searchTags(query);
     }
 
     ngOnDestroy() {

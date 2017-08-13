@@ -32,7 +32,7 @@
     "@angular/animations":" 4.3.3",
     "angular-in-memory-web-api": "0.3.2",
     "ng2-dnd": "4.2.0",
-    "ng4-tag-input": "1.0.5",
+    "ng4-tag-input": "1.0.4",
     "bootstrap": "4.0.0-alpha.6",
     "core-js": "^2.4.1",
     "lodash": "4.17.4",

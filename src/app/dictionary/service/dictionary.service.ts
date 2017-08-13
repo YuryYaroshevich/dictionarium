@@ -5,12 +5,15 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { Dictionary } from '../model/dictionary';
+import {AbstractService} from "./abstract.service";
 
 @Injectable()
-export class DictionaryService {
+export class DictionaryService extends AbstractService {
     private dictionaryUrl = 'http://localhost:8081/dictionary';
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+        super();
+    }
 
     public getDictionaries(ids?: string): Observable<Dictionary[]> {
         let url: string = this.dictionaryUrl;
@@ -33,8 +36,13 @@ export class DictionaryService {
                         .catch(this.handleError);
     }
 
-    public updateDictionary(updatedDictionary: Dictionary): Observable<Dictionary> {
-        return this.http.put(this.dictionaryUrl, updatedDictionary)
+    public updateDictionary(updatedDictionary: Dictionary,
+                            newTags: string[],
+                            removedTags: string[]): Observable<Dictionary> {
+        let newTagsParam = newTags.join(",");
+        let removedTagsParam = removedTags.join(",");
+        return this.http.put(this.dictionaryUrl, updatedDictionary,
+            {params: {newTags: newTagsParam, removedTags: removedTagsParam}})
                         .map(this.extractData)
                         .catch(this.handleError);
     }
@@ -62,23 +70,5 @@ export class DictionaryService {
         return this.http.put(url, {})
             .map(this.extractData)
             .catch(this.handleError);
-    }
-
-    private extractData(res: Response) {
-        let body = res.json();
-        return body || { };
-    }
-
-    private handleError (error: Response | any) {
-        let errMsg: string;
-        if (error instanceof Response) {
-            const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-        } else {
-            errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
-        return Observable.throw(errMsg);
     }
 }

@@ -32,7 +32,11 @@
         </div>
 
         <div id="tags">
-            <tag-input [(ngModel)]='dictionary.tags' modelAsStrings="true"></tag-input>
+            <tag-input [(ngModel)]='dictionary.tags' modelAsStrings="true"
+                       (onAdd)="onTagAdd($event)" (onRemove)="onTagRemove($event)"
+                       (onTextChange)="findTags($event)">
+                <tag-input-dropdown [autocompleteObservable]="findTags"></tag-input-dropdown>
+            </tag-input>
         </div>
 
         <div class="buttons">

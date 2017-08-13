@@ -29,13 +29,13 @@ export class EditDictionaryComponent extends DictionaryForm implements OnInit, O
         });
     }
 
-    create() {
+    /*create() {
         this.dictionaryService.updateDictionary(this.dictionary)
             .subscribe(
                 dictionary => this.router.navigate(['dictionary', dictionary.id]),
                 error => console.log(error)
             );
-    }
+    }*/
 
     ngOnDestroy() {
         this.subscription.unsubscribe();
