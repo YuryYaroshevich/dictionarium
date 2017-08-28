@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
+import { NgModule } from "@angular/core";
 import {HttpModule} from "@angular/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 
 import {ROUTING} from "./app.routing";
@@ -25,11 +25,15 @@ import {MatcherLearnComponent} from "./app/dictionary/component/learn-dictionary
 import {ClickerLearnComponent} from "./app/dictionary/component/learn-dictionary/clicker-learn.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TagService} from "./app/dictionary/service/tag.service";
-import {TagInputModule} from "ng4-tag-input";
+import {CommonModule} from "@angular/common";
+import {Ng2DropdownModule} from "ng2-material-dropdown";
+import {RlTagInputModule} from 'angular2-tag-input';
+import {SearchService} from "./app/dictionary/service/search.service";
+
 
 @NgModule({
   imports: [ BrowserModule, HttpModule, FormsModule, ROUTING, DndModule.forRoot(),
-      TagInputModule, BrowserAnimationsModule],
+      BrowserAnimationsModule, CommonModule, ReactiveFormsModule, Ng2DropdownModule, RlTagInputModule],
   declarations: [ MyApp, DictionaryListComponent,
                   DictionaryComponent, LearnDictionaryComponent, FlashCardsLearnComponent,
                   FlashCardsWritingComponent, CreateDictionaryComponent,
@@ -37,6 +41,7 @@ import {TagInputModule} from "ng4-tag-input";
                   RepeatLearningComponent, DictationLearnComponent, MatcherLearnComponent,
                   ClickerLearnComponent],
   bootstrap: [ MyApp ],
-  providers: [DictionaryService, PronounceService, ActiveLearnTabService, TagService]
+  providers: [DictionaryService, PronounceService, ActiveLearnTabService,
+      TagService, SearchService]
 })
 export class AppModule {}

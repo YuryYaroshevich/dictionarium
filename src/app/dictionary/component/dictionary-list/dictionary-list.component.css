@@ -31,3 +31,12 @@
     width: 35%;
     margin-bottom: 15px;
 }
+
+#search-input {
+    width: 35%;
+    margin-bottom: 20px;
+}
+
+#back-to-list {
+    margin-bottom: 20px;
+}

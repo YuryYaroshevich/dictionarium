@@ -31,12 +31,18 @@
             </table>
         </div>
 
-        <div id="tags">
+        <!--<div id="tags">
             <tag-input [(ngModel)]='dictionary.tags' modelAsStrings="true"
                        (onAdd)="onTagAdd($event)" (onRemove)="onTagRemove($event)"
-                       (onTextChange)="findTags($event)">
-                <tag-input-dropdown [autocompleteObservable]="findTags"></tag-input-dropdown>
+                       >&lt;!&ndash;(onTextChange)="findTags($event)"&ndash;&gt;
+                 &lt;!&ndash;<tag-input-dropdown [autocompleteObservable]="findTags"></tag-input-dropdown>&ndash;&gt;
             </tag-input>
+        </div>-->
+        <div id="tags">
+            <rl-tag-input [(ngModel)]="dictionary.tags" placeholder="Tags"
+                          (addTag)="onTagAdd($event)"
+                          (removeTag)="onTagRemove($event)"
+                          autocomplete="true" autocompleteItems="{{dictionary.tags}}"></rl-tag-input>
         </div>
 
         <div class="buttons">

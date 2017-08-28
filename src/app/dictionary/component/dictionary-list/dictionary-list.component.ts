@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 
 import { Dictionary } from '../../model/dictionary';
 import { DictionaryService } from '../../service/dictionary.service';
+import {SearchService} from "../../service/search.service";
 
 
 @Component({
@@ -19,8 +20,14 @@ export class DictionaryListComponent implements OnInit{
   errorMessage: String;
   selectForLearnMode: boolean = false;
   selectForMergeMode: boolean = false;
+  searchText: string;
+  selectedSearchType: string = 'tag';
+  searchTypes: string[] = ['tag', 'name'];
+  searchDropdownShow: boolean = false;
+  searchMode: boolean = false;
 
   constructor(private dictionaryService: DictionaryService,
+              private searchService: SearchService,
               private router: Router) {}
 
   ngOnInit():void {
@@ -90,5 +97,29 @@ export class DictionaryListComponent implements OnInit{
               this.cancelMergeMode();
             },
             error =>  console.log(error));
+  }
+
+  selectSearchType(searchType: any) {
+    this.selectedSearchType = searchType;
+    this.searchDropdownToggle();
+  }
+
+  searchDropdownToggle() {
+    this.searchDropdownShow = !this.searchDropdownShow;
+  }
+
+  search() {
+    this.searchMode = true;
+    this.searchService.search(this.searchText, this.selectedSearchType)
+        .subscribe(
+            dictionaries => this.dictionaries = dictionaries,
+            error =>  this.errorMessage = <any>error
+        )
+  }
+
+  switchOfSearchMode() {
+    this.searchMode = false;
+    this.searchText = '';
+    this.ngOnInit();
   }
 }

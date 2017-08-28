@@ -1,14 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import * as _ from 'lodash';
 
 import { DictionaryEntry } from '../../model/dictionary-entry';
 import { DictionaryService } from '../../service/dictionary.service';
 import { DictionaryForm } from '../new-dictionary/dictionary-form';
 import {Dictionary} from "../../model/dictionary";
-import {TagModel} from "ng4-tag-input/dist/modules/components/helpers/accessor";
 import {TagService} from "../../service/tag.service";
 import {Observable} from "rxjs/Observable";
+
 
 
 @Component({
@@ -22,6 +23,7 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
     newDictionaryName: string;
     newTags: string[] = [];
     removedTags: string[] = [];
+    autocompleteTags: string[] = [];
 
     constructor(private dictionaryService: DictionaryService,
                 private tagService: TagService,
@@ -40,7 +42,7 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
                         dictionary => this.dictionary = dictionary,
                         error => console.log(error)
                     );
-            });            
+            });
     }
 
     save() {
@@ -97,8 +99,9 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
         this.removedTags.push(tag);
     }
 
-    findTags(query: string): Observable<string[]> {
-        return this.tagService.searchTags(query);
+    findTags(query: string): void {
+        this.tagService.searchTags(query)
+            .subscribe(tags => this.autocompleteTags = tags);
     }
 
     ngOnDestroy() {
