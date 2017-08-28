@@ -18,28 +18,34 @@
 <a href="javascript:void(0)" id="back-to-list" class="btn btn-default btn-sm"
    (click)="switchOfSearchMode()" *ngIf="searchMode">Back to list</a>
 
-<div *ngFor="let dictionary of dictionaries">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <input type="checkbox" value="" class="learn-checkbox"
-             (change)="onLearnCheckboxClick(dictionary.id, $event.target.checked)"
-             *ngIf="selectForLearnMode">
-      <input type="checkbox" value="" class="learn-checkbox"
-             (change)="onMergeCheckboxClick(dictionary.id, $event.target.checked)"
-             *ngIf="selectForMergeMode">
-      <a class="dictionary-name no-underline" href="javascript:void(0)"
-         [routerLink]="['/dictionary', dictionary.id]">
-        {{dictionary.name}}
-      </a>
-      <a href="javascript:void(0)"
-         (click)="deleteDictionary(dictionary.id)"
-         class="right-side no-underline">delete</a>
-      <a class="no-underline" href="javascript:void(0)"
-         [routerLink]="['/dictionary', dictionary.id, 'edit']"
-         class="right-side no-underline">edit</a>
+
+<div *ngIf="dictionaries !== [] else loading">
+  <div *ngFor="let dictionary of dictionaries">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <input type="checkbox" value="" class="learn-checkbox"
+               (change)="onLearnCheckboxClick(dictionary.id, $event.target.checked)"
+               *ngIf="selectForLearnMode">
+        <input type="checkbox" value="" class="learn-checkbox"
+               (change)="onMergeCheckboxClick(dictionary.id, $event.target.checked)"
+               *ngIf="selectForMergeMode">
+        <a class="dictionary-name no-underline" href="javascript:void(0)"
+           [routerLink]="['/dictionary', dictionary.id]">
+          {{dictionary.name}}
+        </a>
+        <a href="javascript:void(0)"
+           (click)="deleteDictionary(dictionary.id)"
+           class="right-side no-underline">delete</a>
+        <a class="no-underline" href="javascript:void(0)"
+           [routerLink]="['/dictionary', dictionary.id, 'edit']"
+           class="right-side no-underline">edit</a>
+      </div>
     </div>
-  </div>  
+  </div>
 </div>
+<ng-template #loading>
+  You haven't created any dictionaries yet.
+</ng-template>
 
 <div id="dictionaries-operations">
   <a href="javascript:void(0)" class="btn btn-info"
@@ -69,9 +75,9 @@
   </div>
 </div>
 
-<!--<div *ngIf="!dictionaries?.length === 0">
-  You haven't dictionaries created yet.
-</div>-->
+
+
+
 
 
 

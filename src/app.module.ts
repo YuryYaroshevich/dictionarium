@@ -29,6 +29,8 @@ import {CommonModule} from "@angular/common";
 import {Ng2DropdownModule} from "ng2-material-dropdown";
 import {RlTagInputModule} from 'angular2-tag-input';
 import {SearchService} from "./app/dictionary/service/search.service";
+import {LoginComponent} from "./app/dictionary/component/authorization/login.component";
+import {AuthService} from "./app/dictionary/service/auth.service";
 
 
 @NgModule({
@@ -39,9 +41,9 @@ import {SearchService} from "./app/dictionary/service/search.service";
                   FlashCardsWritingComponent, CreateDictionaryComponent,
                   EditDictionaryComponent, WordTranslationComponent, Tabs, Tab,
                   RepeatLearningComponent, DictationLearnComponent, MatcherLearnComponent,
-                  ClickerLearnComponent],
+                  ClickerLearnComponent, LoginComponent],
   bootstrap: [ MyApp ],
   providers: [DictionaryService, PronounceService, ActiveLearnTabService,
-      TagService, SearchService]
+      TagService, SearchService, AuthService]
 })
 export class AppModule {}
