@@ -2,30 +2,54 @@ import {Http, Response, Headers} from "@angular/http";
 import {AbstractService} from "./abstract.service";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import {User} from "../model/user";
+import {Account} from "../model/account";
 
 @Injectable()
 export class AuthService extends AbstractService {
-    private authUrl = 'http://localhost:8081/authentication';
+    private authUrl = 'http://localhost:8081/auth';
+    private loginUrl = 'http://localhost:8081/login';
 
     constructor(private http: Http) {
         super();
     }
 
-    public signIn(username: string, password: string): Observable<User> {
-
-        return null;
+    public signIn(email: string, password: string): Observable<void> {
+        return this.http.post(this.loginUrl,
+                            new Account(email, password))
+            .map(this.saveToken)
+            .catch(this.handleError);
     }
 
-    public signUp(username: string, password: string): Observable<User> {
-        let url = this.authUrl + '/signup';
-        return this.http.post(url, new User(username, password))
-            .map((response: Response) => {
-                let user = response.json();
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                return user;
-            })
+    protected saveToken(res: Response) {
+        if (res.status === 200) {
+            let token = res.headers.get("Authorization");
+            localStorage.setItem("token", token);
+        } else {
+            throw new Error("User credentials are incorrect.")
+        }
+    }
+
+    public signUp(email: string, password: string): Observable<void> {
+        let account: Account = new Account(email, password);
+        let url = this.authUrl + '/sign-up';
+        return this.http.post(url, account)
+            .map(this.signUpResponse)
             .catch(this.handleError);
+    }
+
+    protected signUpResponse(res: Response) {
+        if (res.status !== 201) {
+            throw new Error("Error happened during profile creation.")
+        }
+    }
+
+    public logout(): Observable<any> {
+        let url = 'http://localhost:8081/logout';
+        return this.http.post(url, {}).map(this.extractData).catch(this.handleError);
+    }
+
+    public getToken(): string {
+        return localStorage.getItem("token");
     }
 
 }

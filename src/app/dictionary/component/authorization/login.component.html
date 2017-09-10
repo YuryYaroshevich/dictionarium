@@ -1,9 +1,12 @@
+<div *ngIf="userCreated">
+    Your account was successfully created! Try to login with it now.
+</div>
 <div id="login" class="form-horizontal">
     <fieldset>
         <div id="login" class="form-group">
             <div>
-                <label>Login:</label>
-                <input type="text" class="form-control" [(ngModel)]="username" placeholder="username">
+                <label>Emailxs:</label>
+                <input type="text" class="form-control" [(ngModel)]="email" placeholder="username">
             </div>
         </div>
 

@@ -6,12 +6,13 @@ import 'rxjs/add/operator/map';
 
 import { Dictionary } from '../model/dictionary';
 import {AbstractService} from "./abstract.service";
+import {AuthService} from "./auth.service";
 
 @Injectable()
 export class DictionaryService extends AbstractService {
     private dictionaryUrl = 'http://localhost:8081/dictionary';
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private authService: AuthService) {
         super();
     }
 
@@ -20,7 +21,9 @@ export class DictionaryService extends AbstractService {
         if (ids) {
             url += '?ids=' + ids;
         }
-        return this.http.get(url)
+        let token = this.authService.getToken();
+        let headers: Headers = new Headers({"Authorization": token});
+        return this.http.get(url, {headers: headers})
             .map(this.extractData)
             .catch(this.handleError);
     }
