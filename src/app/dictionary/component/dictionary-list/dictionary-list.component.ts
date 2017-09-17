@@ -41,7 +41,7 @@ export class DictionaryListComponent implements OnInit{
     this.dictionaryService.deleteDictionary(id)
             .subscribe( 
                 () => this.ngOnInit(),
-                error =>  console.log(error)
+                error => console.log(error)
             );
   }
 

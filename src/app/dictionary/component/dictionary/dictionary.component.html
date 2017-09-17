@@ -38,11 +38,19 @@
                  &lt;!&ndash;<tag-input-dropdown [autocompleteObservable]="findTags"></tag-input-dropdown>&ndash;&gt;
             </tag-input>
         </div>-->
-        <div id="tags">
+        <!--<div id="tags">
             <rl-tag-input [(ngModel)]="dictionary.tags" placeholder="Tags"
                           (addTag)="onTagAdd($event)"
                           (removeTag)="onTagRemove($event)"
                           autocomplete="true" autocompleteItems="{{dictionary.tags}}"></rl-tag-input>
+        </div>-->
+
+        <div id="tags" class="form-group">
+            <div>
+                <label>Separate tags by '|'</label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="tagsStr" placeholder="tags">
+            </div>
         </div>
 
         <div class="buttons">

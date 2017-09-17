@@ -16,14 +16,15 @@ export class AuthService extends AbstractService {
     public signIn(email: string, password: string): Observable<void> {
         return this.http.post(this.loginUrl,
                             new Account(email, password))
-            .map(this.saveToken)
+            .map(res => this.saveUserInfo(res, email))
             .catch(this.handleError);
     }
 
-    protected saveToken(res: Response) {
+    protected saveUserInfo(res: Response, email: string) {
         if (res.status === 200) {
             let token = res.headers.get("Authorization");
             localStorage.setItem("token", token);
+            localStorage.setItem("email", email);
         } else {
             throw new Error("User credentials are incorrect.")
         }
@@ -43,13 +44,30 @@ export class AuthService extends AbstractService {
         }
     }
 
-    public logout(): Observable<any> {
-        let url = 'http://localhost:8081/logout';
-        return this.http.post(url, {}).map(this.extractData).catch(this.handleError);
+    public logout(): void {
+        localStorage.removeItem("token");
     }
 
     public getToken(): string {
         return localStorage.getItem("token");
+    }
+
+    public getEmail(): string {
+        return localStorage.getItem("email");
+    }
+
+    public isLoggedIn(): boolean {
+        return localStorage.getItem("token") !== null;
+    }
+
+    public authorizationHeaderAsObject(): object {
+        let token = this.getToken();
+        return {headers: new Headers({"Authorization": token})};
+    }
+
+    public authorizationHeader(): Headers {
+        let token = this.getToken();
+        return new Headers({"Authorization": token});
     }
 
 }

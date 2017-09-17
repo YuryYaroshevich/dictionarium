@@ -8,16 +8,21 @@ import {Router} from "@angular/router";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  userLoggedIn: boolean = true;
 
   constructor(private authService: AuthService,
               private router: Router) {}
 
   logout() {
-    this.authService.logout()
-        .subscribe(() => {
-          this.userLoggedIn = false;
-          this.router.navigate(['dictionary']);
-        });
+    this.authService.logout();
+    this.router.navigate(['/']);
+    location.reload();
+  }
+
+  isLoggedIn(): boolean {
+      return this.authService.isLoggedIn();
+  }
+
+  user(): string {
+      return this.authService.getEmail();
   }
 }

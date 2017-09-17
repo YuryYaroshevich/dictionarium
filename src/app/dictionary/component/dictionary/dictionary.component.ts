@@ -24,6 +24,7 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
     newTags: string[] = [];
     removedTags: string[] = [];
     autocompleteTags: string[] = [];
+    tagsStr: string;
 
     constructor(private dictionaryService: DictionaryService,
                 private tagService: TagService,
@@ -39,13 +40,20 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
             (params:any) => {
                 this.dictionaryService.getDictionary(params['id'])
                     .subscribe(
-                        dictionary => this.dictionary = dictionary,
+                        dictionary => {
+                            this.dictionary = dictionary;
+                            this.tagsStr = dictionary.tags.join(" | ");
+                        },
                         error => console.log(error)
                     );
             });
     }
 
     save() {
+        let tags: string[] = this.tagsStr.split(/ *\| */);
+        this.removedTags = this.dictionary.tags.filter(tag => tags.indexOf(tag) === -1);
+        this.newTags = tags.filter(tag => this.dictionary.tags.indexOf(tag) === -1);
+        this.dictionary.tags = tags;
         this.dictionaryService.updateDictionary(this.dictionary,
                 this.newTags, this.removedTags)
             .subscribe(

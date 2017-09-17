@@ -14,12 +14,13 @@
             <a [routerLink]="['/dictionary']">My dictionaries</a>
           </li>
           <li>
-            <a [routerLink]="['/create-dictionary']">New dictionary</a>
+            <a *ngIf="isLoggedIn()" [routerLink]="['/create-dictionary']">New dictionary</a>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a [routerLink]="['/login']">Login</a></li>
-          <li><a *ngIf="userLoggedIn" (click)="logout()">Logout</a></li>
+          <li><a *ngIf="!isLoggedIn()" [routerLink]="['/login']">Login</a></li>
+          <li><a *ngIf="isLoggedIn()">{{user()}}</a></li>
+          <li><a *ngIf="isLoggedIn()" (click)="logout()">Logout</a></li>
         </ul>
       </div>
     </div>
