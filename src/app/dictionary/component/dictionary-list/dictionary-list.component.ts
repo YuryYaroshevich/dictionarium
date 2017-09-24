@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import { Dictionary } from '../../model/dictionary';
 import { DictionaryService } from '../../service/dictionary.service';
 import {SearchService} from "../../service/search.service";
+import {AuthService} from "../../service/auth.service";
 
 
 @Component({
@@ -16,10 +17,13 @@ export class DictionaryListComponent implements OnInit{
   dictionaries: Dictionary[];
   dictionIdsToLearn: string[] = [];
   dictionIdsToMerge: string[] = [];
+  dictionIdsToShare: string[] = [];
+  sharedDictionariesToken: string;
   newDictionaryName: string;
   errorMessage: String;
   selectForLearnMode: boolean = false;
   selectForMergeMode: boolean = false;
+  selectForShareMode: boolean = false;
   searchText: string;
   selectedSearchType: string = 'tag';
   searchTypes: string[] = ['tag', 'name'];
@@ -28,6 +32,7 @@ export class DictionaryListComponent implements OnInit{
 
   constructor(private dictionaryService: DictionaryService,
               private searchService: SearchService,
+              private authService: AuthService,
               private router: Router) {}
 
   ngOnInit():void {
@@ -35,6 +40,10 @@ export class DictionaryListComponent implements OnInit{
       .subscribe(
                   dictionaries => this.dictionaries = dictionaries,
                   error =>  this.errorMessage = <any>error);
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   deleteDictionary(id: string) {
@@ -48,6 +57,7 @@ export class DictionaryListComponent implements OnInit{
   selectForLearn() {
     this.selectForLearnMode = true;
     this.selectForMergeMode = false;
+    this.selectForShareMode = false;
   }
 
   onLearnCheckboxClick(dictionaryId: string, isChecked: boolean): void {
@@ -72,6 +82,7 @@ export class DictionaryListComponent implements OnInit{
   selectForMerge() {
     this.selectForMergeMode = true;
     this.selectForLearnMode = false;
+    this.selectForShareMode = false;
   }
 
   onMergeCheckboxClick(dictionaryId: string, isChecked: boolean): void {
@@ -96,6 +107,34 @@ export class DictionaryListComponent implements OnInit{
               this.ngOnInit();
               this.cancelMergeMode();
             },
+            error =>  console.log(error));
+  }
+
+  selectForShare() {
+    this.selectForMergeMode = false;
+    this.selectForLearnMode = false;
+    this.selectForShareMode = true;
+  }
+
+  onShareCheckboxClick(dictionaryId: string, isChecked: boolean): void {
+    if (isChecked) {
+      this.dictionIdsToShare.push(dictionaryId);
+    } else {
+      _.remove(this.dictionIdsToShare, dict => dict.id === dictionaryId);
+    }
+  }
+
+  cancelShareMode() {
+    this.dictionIdsToShare = [];
+    this.selectForShareMode = false;
+  }
+
+  shareDictionaries() {
+    this.dictionaryService
+        .shareDictionaries(this.dictionIdsToShare)
+        .subscribe(
+            sharedDictionariesToken =>
+                this.sharedDictionariesToken = sharedDictionariesToken,
             error =>  console.log(error));
   }
 

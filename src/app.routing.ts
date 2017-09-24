@@ -7,6 +7,7 @@ import {LearnDictionaryComponent} from "./app/dictionary/component/learn-diction
 import {CreateDictionaryComponent} from "./app/dictionary/component/new-dictionary/create-dictionary.component";
 import {EditDictionaryComponent} from "./app/dictionary/component/new-dictionary/edit-dictionary.component";
 import {LoginComponent} from "./app/dictionary/component/authorization/login.component";
+import {SharedDictionariesComponent} from "./app/dictionary/component/shared/shared-dictionaries.component";
 
 export const ROUTES: Routes = [
   { path: 'dictionary', component: DictionaryListComponent},
@@ -16,6 +17,7 @@ export const ROUTES: Routes = [
   { path: 'dictionary/:id/edit', component: EditDictionaryComponent},
   { path: 'create-dictionary', component: CreateDictionaryComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'receive-shared', component: SharedDictionariesComponent},
   { path: '', redirectTo: 'dictionary', pathMatch: 'full' },
 ];
 

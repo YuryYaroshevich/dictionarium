@@ -55,7 +55,7 @@
 
         <div class="buttons">
             <a href="javascript:void(0)" [routerLink]="['learn']" class="btn btn-info">Learn</a>
-            <a href="javascript:void(0)" (click)="save()" class="btn btn-success">Save</a>
+            <a href="javascript:void(0)" *ngIf="isLoggedIn()" (click)="save()" class="btn btn-success">Save</a>
         </div>
     </div>
 
@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <a href="javascript:void(0)" *ngIf="!extractModeOn" (click)="extractMode()"
+    <a href="javascript:void(0)" *ngIf="!extractModeOn && isLoggedIn()" (click)="extractMode()"
        id="extract-new-button" class="btn btn-info">Extract new dictionary</a>
     <div *ngIf="extractModeOn" id="submit-new-dict">
         <input id="new-dict-name-input" class="form-control"

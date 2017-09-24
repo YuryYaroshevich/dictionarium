@@ -31,6 +31,7 @@ import {RlTagInputModule} from 'angular2-tag-input';
 import {SearchService} from "./app/dictionary/service/search.service";
 import {LoginComponent} from "./app/dictionary/component/authorization/login.component";
 import {AuthService} from "./app/dictionary/service/auth.service";
+import {SharedDictionariesComponent} from "./app/dictionary/component/shared/shared-dictionaries.component";
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import {AuthService} from "./app/dictionary/service/auth.service";
                   FlashCardsWritingComponent, CreateDictionaryComponent,
                   EditDictionaryComponent, WordTranslationComponent, Tabs, Tab,
                   RepeatLearningComponent, DictationLearnComponent, MatcherLearnComponent,
-                  ClickerLearnComponent, LoginComponent],
+                  ClickerLearnComponent, LoginComponent, SharedDictionariesComponent],
   bootstrap: [ MyApp ],
   providers: [DictionaryService, PronounceService, ActiveLearnTabService,
       TagService, SearchService, AuthService]

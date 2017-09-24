@@ -9,6 +9,7 @@ import { DictionaryForm } from '../new-dictionary/dictionary-form';
 import {Dictionary} from "../../model/dictionary";
 import {TagService} from "../../service/tag.service";
 import {Observable} from "rxjs/Observable";
+import {AuthService} from "../../service/auth.service";
 
 
 
@@ -28,6 +29,7 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
 
     constructor(private dictionaryService: DictionaryService,
                 private tagService: TagService,
+                private authService: AuthService,
                 private activatedRoute: ActivatedRoute,
                 private router: Router) {
         super();
@@ -47,6 +49,10 @@ export class DictionaryComponent extends DictionaryForm implements OnInit, OnDes
                         error => console.log(error)
                     );
             });
+    }
+
+    isLoggedIn(): boolean {
+        return this.authService.isLoggedIn();
     }
 
     save() {

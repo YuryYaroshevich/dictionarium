@@ -14,7 +14,12 @@
             <a [routerLink]="['/dictionary']">My dictionaries</a>
           </li>
           <li>
-            <a *ngIf="isLoggedIn()" [routerLink]="['/create-dictionary']">New dictionary</a>
+            <a *ngIf="isLoggedIn()"
+               [routerLink]="['/create-dictionary']">New dictionary</a>
+          </li>
+          <li>
+            <a *ngIf="isLoggedIn()"
+               [routerLink]="['/receive-shared']">Shared</a>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

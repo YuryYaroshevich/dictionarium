@@ -4,6 +4,7 @@ import { Response } from '@angular/http';
 
 export class AbstractService {
     protected extractData(res: Response) {
+
         let body = res.json();
         return body || { };
     }

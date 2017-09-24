@@ -29,14 +29,17 @@
         <input type="checkbox" value="" class="learn-checkbox"
                (change)="onMergeCheckboxClick(dictionary.id, $event.target.checked)"
                *ngIf="selectForMergeMode">
+        <input type="checkbox" value="" class="learn-checkbox"
+               (change)="onShareCheckboxClick(dictionary.id, $event.target.checked)"
+               *ngIf="selectForShareMode">
         <a class="dictionary-name no-underline" href="javascript:void(0)"
            [routerLink]="['/dictionary', dictionary.id]">
           {{dictionary.name}}
         </a>
-        <a href="javascript:void(0)"
+        <a href="javascript:void(0)" *ngIf="isLoggedIn()"
            (click)="deleteDictionary(dictionary.id)"
            class="right-side no-underline">delete</a>
-        <a class="no-underline" href="javascript:void(0)"
+        <a class="no-underline" href="javascript:void(0)" *ngIf="isLoggedIn()"
            [routerLink]="['/dictionary', dictionary.id, 'edit']"
            class="right-side no-underline">edit</a>
       </div>
@@ -50,7 +53,7 @@
 <div id="dictionaries-operations">
   <a href="javascript:void(0)" class="btn btn-info"
      (click)="selectForLearn()"
-     *ngIf="!selectForLearnMode && !selectForMergeMode" id="select-learn-btn">
+     *ngIf="!selectForLearnMode && !selectForMergeMode && !selectForShareMode" id="select-learn-btn">
     Select for learn
   </a>
   <div *ngIf="selectForLearnMode" id="submit-learn-btn">
@@ -61,8 +64,22 @@
   </div>
 
   <a href="javascript:void(0)" class="btn btn-info"
+     (click)="selectForShare()"
+     *ngIf="!selectForLearnMode && !selectForMergeMode && !selectForShareMode && isLoggedIn()" id="select-share-btn">
+    Select for share
+  </a>
+  <div *ngIf="selectForShareMode" id="submit-share-btn">
+    <input id="shared-dict-token" class="form-control"
+           [(ngModel)]="sharedDictionariesToken" placeholder="token will appear here" />
+    <a href="javascript:void(0)" class="btn btn-success left-btn"
+       (click)="shareDictionaries()">Share</a>
+    <a href="javascript:void(0)" class="btn btn-default"
+       (click)="cancelShareMode()">Cancel</a>
+  </div>
+
+  <a href="javascript:void(0)" class="btn btn-info"
      (click)="selectForMerge()"
-     *ngIf="!selectForMergeMode && !selectForLearnMode" id="select-merge-btn">
+     *ngIf="!selectForMergeMode && !selectForLearnMode && !selectForShareMode && isLoggedIn()" id="select-merge-btn">
     Select for merging
   </a>
   <div *ngIf="selectForMergeMode">

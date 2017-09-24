@@ -1,0 +1,19 @@
+<div class="form-horizontal">
+    <fieldset>
+        <div id="token" class="form-group">
+            <div>
+                <label>Token:</label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="sharedDictionariesToken" placeholder="shared dictionaries token">
+            </div>
+        </div>
+
+
+        <div class="form-group bottom">
+            <div>
+                <button type="button"
+                        class="btn btn-default" (click)="submitToken()">Submit</button>
+            </div>
+        </div>
+    </fieldset>
+</div>

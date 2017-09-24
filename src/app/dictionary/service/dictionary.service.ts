@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import {Http, Response, Headers, RequestOptionsArgs} from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import {Injectable} from "@angular/core";
+import {Headers, Http} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
 
-import { Dictionary } from '../model/dictionary';
+import {DICTIONARIES_FOR_TEST, Dictionary} from "../model/dictionary";
 import {AbstractService} from "./abstract.service";
 import {AuthService} from "./auth.service";
 
@@ -21,16 +21,26 @@ export class DictionaryService extends AbstractService {
         if (ids) {
             url += '?ids=' + ids;
         }
-        return this.http.get(url,
-            this.authService.authorizationHeaderAsObject())
-            .map(this.extractData)
-            .catch(this.handleError);
+        if (this.authService.isLoggedIn()) {
+            return this.http.get(url,
+                this.authService.authorizationHeaderAsObject())
+                .map(this.extractData)
+                .catch(this.handleError);
+        } else {
+            return new Observable<Dictionary[]>(subscriber =>
+                subscriber.next(Array.from(DICTIONARIES_FOR_TEST.values())));
+        }
     }
 
     public getDictionary(id: number | string): Observable<Dictionary> {
-        let url = this.dictionaryUrl + '/' + id;
-        return this.http.get(url, this.authService.authorizationHeaderAsObject())
-            .map(this.extractData).catch(this.handleError);
+        if (this.authService.isLoggedIn()) {
+            let url = this.dictionaryUrl + '/' + id;
+            return this.http.get(url, this.authService.authorizationHeaderAsObject())
+                .map(this.extractData).catch(this.handleError);
+        } else {
+            return new Observable<Dictionary>(subscriber =>
+                subscriber.next(DICTIONARIES_FOR_TEST.get(id + '')));
+        }
     }
 
     public saveDictionary(dictionary: Dictionary): Observable<Dictionary> {
@@ -76,6 +86,32 @@ export class DictionaryService extends AbstractService {
         let url = this.dictionaryUrl + '/merge?ids=' + ids + '&name=' + name;
         return this.http.put(url, {}, this.authService.authorizationHeaderAsObject())
             .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    shareDictionaries(dictionIdsToShare: string[]): Observable<string> {
+        let url = this.dictionaryUrl + '/share';
+        return this.http.post(url, {},
+            {
+                params: {ids: dictionIdsToShare.join(",")},
+                headers: this.authService.authorizationHeader()
+            })
+            .map(response => response.json()["token"])
+            .catch(this.handleError);
+    }
+
+    receiveSharedDictionaries(sharedDictionariesToken: string): Observable<any> {
+        let url = this.dictionaryUrl + '/receive-shared';
+        return this.http.post(url, {},
+            {
+                params: { token: sharedDictionariesToken },
+                headers: this.authService.authorizationHeader()
+            })
+            .map(response => {
+                if (response.status !== 200) {
+                    throw new Error("Receiving shared failed");
+                }
+            })
             .catch(this.handleError);
     }
 }
