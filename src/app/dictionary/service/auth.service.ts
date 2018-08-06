@@ -8,6 +8,7 @@ import {Account} from "../model/account";
 export class AuthService extends AbstractService {
     private authUrl = 'http://localhost:8081/auth';
     private loginUrl = 'http://localhost:8081/login';
+    private gmailLoginUrl = 'http://localhost:8081/login/gmail';
 
     constructor(private http: Http) {
         super();
@@ -20,7 +21,7 @@ export class AuthService extends AbstractService {
             .catch(this.handleError);
     }
 
-    protected saveUserInfo(res: Response, email: string) {
+    protected saveUserInfo(res: Response, email?: string) {
         if (res.status === 200) {
             let token = res.headers.get("Authorization");
             localStorage.setItem("token", token);
@@ -38,14 +39,37 @@ export class AuthService extends AbstractService {
             .catch(this.handleError);
     }
 
+    public gmailSignin(): Observable<void> {
+        return this.http.post(this.gmailLoginUrl, {})
+            .map(this.signUpResponse)
+            .catch(this.handleError);
+    }
+
+    public getOauthToken(params: object): Observable<any> {
+//state=SrXpvq&code=4%2Fe3LEqeYYQhmPQH3-camF7i2iy9wQTTeFHP1C1GIo4WQ&authuser=1&session_state=50d6fcb6e4b96386d715dfbbc9895ed4e302dd6a..454c&prompt=none
+        return this.http.post(this.gmailLoginUrl, {}, {
+            params: {
+                state: params['state'],
+                code: params['code'],
+                authuser: params['authuser'],
+                session_state: params['session_state'],
+                prompt: params['prompt']
+            }})
+            .map(res => this.saveUserInfo(res))
+            .catch(this.handleError);
+    }
+
     protected signUpResponse(res: Response) {
+        console.log(res.status);
         if (res.status !== 201) {
             throw new Error("Error happened during profile creation.")
         }
     }
 
-    public logout(): void {
-        localStorage.removeItem("token");
+    public logout(): Observable<void> {
+        return this.http.post('http://localhost:8081/logout', {},
+            this.authorizationHeaderAsObject())
+            .catch(this.handleError);
     }
 
     public getToken(): string {
@@ -70,4 +94,11 @@ export class AuthService extends AbstractService {
         return new Headers({"Authorization": token});
     }
 
+    public setToken(token: string) {
+        localStorage.setItem("token", "Bearer " + token);
+    }
+
+    public setEmail(email: string) {
+        localStorage.setItem("email", email);
+    }
 }

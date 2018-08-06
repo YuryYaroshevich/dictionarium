@@ -24,6 +24,13 @@ export class LoginComponent {
             );
     }
 
+    gmail(): void {
+        this.authService.gmailSignin()
+            .subscribe(
+                () => this.router.navigate(['dictionary']),
+                error => console.log(error))
+    }
+
     signUp(): void {
         this.authService.signUp(this.email, this.password)
             .subscribe(() => this.userCreated = true);

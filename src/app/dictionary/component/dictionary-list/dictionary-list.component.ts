@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import * as _ from 'lodash';
 
 import { Dictionary } from '../../model/dictionary';
@@ -33,13 +33,25 @@ export class DictionaryListComponent implements OnInit{
   constructor(private dictionaryService: DictionaryService,
               private searchService: SearchService,
               private authService: AuthService,
-              private router: Router) {}
+              private router: Router,
+              private activeRoute: ActivatedRoute) {}
 
   ngOnInit():void {
-    this.dictionaryService.getDictionaries()
-      .subscribe(
-                  dictionaries => this.dictionaries = dictionaries,
-                  error =>  this.errorMessage = <any>error);
+
+    this.activeRoute.queryParams.subscribe(params => {
+      if (params['state']) {
+        this.authService.getOauthToken(params).subscribe(() =>
+            this.dictionaryService.getDictionaries()
+                .subscribe(
+                    dictionaries => this.dictionaries = dictionaries,
+                    error =>  this.errorMessage = <any>error)
+        );
+      }
+      this.dictionaryService.getDictionaries()
+          .subscribe(
+              dictionaries => this.dictionaries = dictionaries,
+              error =>  this.errorMessage = <any>error);
+    });
   }
 
   isLoggedIn(): boolean {

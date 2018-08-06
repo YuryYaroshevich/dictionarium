@@ -13,9 +13,13 @@ export class MyApp {
               private router: Router) {}
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/']);
-    location.reload();
+    this.authService.logout().subscribe(() => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
+      this.router.navigate(['/']);
+      location.reload();
+    });
+
   }
 
   isLoggedIn(): boolean {
